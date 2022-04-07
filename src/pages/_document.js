@@ -84,7 +84,7 @@ export default class MyDocument extends Document {
         </Head>
         <body>
           <Main />
-          <NextScript nonce={this.props.nonce} />
+          <NextScript nonce={this.props.nonce}  />
         </body>
       </Html>
     );
