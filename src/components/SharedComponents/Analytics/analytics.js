@@ -1,0 +1,6 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-undef */
+/*@shinsenter/defer.js*/
+!function (e, o, t, n, i, d) { function f(e, t) { d ? n(e, t || 32) : i.push(e, t) } function c(e, t, n, i) { return t && o.getElementById(t) || (i = o.createElement(e || 'SCRIPT'), t && (i.id = t), n && (i.onload = n), o.head.appendChild(i)), i || {} } d = /p/.test(o.readyState), e.addEventListener('on' + t in e ? t : 'load', function () { for (d = 1; i[0];)f(i.shift(), i.shift()) }), f._ = c, e.defer = f, e.deferscript = function (e, t, n, i) { f(function () { c('', t, i).src = e }, n) } }(this, document, 'pageshow', setTimeout, []);
+deferscript('https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}', 'google-ANALYTIC', 1800, function () {window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', '${GA_TRACKING_ID}', { page_path: window.location.pathname, });})
+deferscript('https://www.googletagmanager.com/gtag/js?id=${GA_TAGMANAGER_ID}', 'google-tag', 1800, function () {(window.dataLayer = window.dataLayer || []).push('config', '${GA_TAGMANAGER_ID}');})

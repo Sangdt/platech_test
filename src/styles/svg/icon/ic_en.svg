@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="13px" height="9px" viewBox="0 0 13 9" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>icons8-great_britain</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Desktop" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Homepage-05" transform="translate(-1350.000000, -18.000000)" fill-rule="nonzero">
+            <g id="Header">
+                <g id="Group-27">
+                    <g transform="translate(1158.000000, 16.000000)">
+                        <g id="icons8-great_britain" transform="translate(192.000000, 2.000000)">
+                            <polygon id="Path" fill="#3F51B5" points="0 0 13 0 13 9 0 9"></polygon>
+                            <polygon id="Path" fill="#FFFFFF" points="0 1.35514286 6.14840909 5.44339286 7.07288636 3.79767857 1.36145455 0 0 0"></polygon>
+                            <polygon id="Path" fill="#FFFFFF" points="13 0 11.9337045 0 6.22256818 3.79735714 7.14675 5.44339286 13 1.55121429"></polygon>
+                            <polygon id="Path" fill="#FFFFFF" points="7.14675 3.30139286 6.22256818 4.94710714 12.3177955 9 13 9 13 7.19325"></polygon>
+                            <polygon id="Path" fill="#FFFFFF" points="0 7.38996429 0 9 0.977954545 9 7.07288636 4.94742857 6.14870455 3.30139286"></polygon>
+                            <polygon id="Path" fill="#FFFFFF" points="0 3.21428571 13 3.21428571 13 5.78571429 0 5.78571429"></polygon>
+                            <polygon id="Path" fill="#FFFFFF" points="5.31818182 0 7.68181818 0 7.68181818 9 5.31818182 9"></polygon>
+                            <g id="Group" fill="#E53935">
+                                <path d="M4.49622727,3.21428571 L0,0.224678571 L0,0.978107143 L3.36286364,3.21428571 L4.49622727,3.21428571 Z M12.5003864,0 L7.66615909,3.21428571 L8.79922727,3.21428571 L13,0.421392857 L13,0 L12.5003864,0 Z M9.18331818,5.78571429 L13,8.32339286 L13,7.56996429 L10.3163864,5.78571429 L9.18331818,5.78571429 Z M4.11213636,5.78571429 L0,8.51978571 L0,9 L0.411272727,9 L5.24520455,5.78571429 L4.11213636,5.78571429 Z M0,3.85714286 L13,3.85714286 L13,5.14285714 L0,5.14285714 L0,3.85714286 Z" id="Shape"></path>
+                                <polygon id="Path" points="5.90909091 0 7.09090909 0 7.09090909 9 5.90909091 9"></polygon>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
