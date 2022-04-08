@@ -59,57 +59,60 @@ const ShowcaseGrid = ({ categoryName, id, productInCategory, seoLink }) => {
           </Typography>
         </Box>
         <Grid container spacing={{ xs: 2, md: 4 }}>
-          {productInCategory.map((item, i) => (
-            <Grid key={`${i}_${item.id}`} item xs={12} sm={6} md={4}>
-              <Box width={1} height={1} position={'relative'}>
-                {item.headerImage?.responsiveImage && <Image
-                  data={item.headerImage.responsiveImage}
-                  // src={item.image}
-                  // alt={item.title}
-                  // loading="lazy"
-                  style={{
-                    filter: 'brightness(0.7)',
-                    borderRadius: 8,
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                  }}
-                />}
-                <Box
-                  position={'absolute'}
-                  bottom={0}
-                  left={0}
-                  right={0}
-                  width={1}
-                  padding={2}
-                  zIndex={2}
-                >
-                  <Typography
-                    color={'common.white'}
-                    fontWeight={700}
-                    variant={'h6'}
-                  >
-                    {item.productName}
-                  </Typography>
-                  {item.price && <Typography color={'common.white'}>
-                    {item.price}
-                  </Typography>}
-                  <Link
-                    href={"/san-pham/" + item.seoLinks}
-                    color={'common.white'}
-                    fontWeight={700}
-                    sx={{ marginTop: 2, display: 'block' }}
-                  >
-                    Mua ngay
-                  </Link>
-                </Box>
-              </Box>
-            </Grid>
-          ))}
+          {productInCategory.map((item, i) => (<SingleProductGrid {...item} key={`${i}_${item.id}`} />))}
         </Grid>
       </Container>
     </Box>
   );
 };
 
+const SingleProductGrid = ({ seoLinks, headerImage, price, productName, searchResultDisplay = false }) => (<Grid item xs={12} sm={6} md={4} margin={5}>
+  <Box width={1} height={1} position={'relative'} paddingTop={searchResultDisplay ?"":"5"}>
+    {headerImage?.responsiveImage && <Image
+      data={headerImage.responsiveImage}
+      // src={item.image}
+      // alt={item.title}
+      // loading="lazy"
+      style={{
+        filter: 'brightness(0.7)',
+        borderRadius: 8,
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover',
+      }}
+    />}
+    <Box
+      position={'absolute'}
+      bottom={0}
+      left={0}
+      right={0}
+      width={1}
+      padding={2}
+      zIndex={2}
+    >
+      <Typography
+        color={'common.white'}
+        fontWeight={700}
+        variant={searchResultDisplay ? 'caption' : 'h6'}
+      >
+        {productName}
+      </Typography>
+      {price && <Typography color={'common.white'}
+        variant={searchResultDisplay ? 'caption' : 'body1'}
+      >
+        {price}
+      </Typography>}
+      {searchResultDisplay && <br />}
+      {seoLinks && <Link
+        href={"/san-pham/" + seoLinks}
+      >
+        <a className={searchResultDisplay ? " text-yellow-400" : " text-white"}>Mua ngay </a>
+      </Link>}
+    </Box>
+  </Box>
+</Grid>);
 export default ShowcaseGrid;
+
+export {
+  SingleProductGrid
+}

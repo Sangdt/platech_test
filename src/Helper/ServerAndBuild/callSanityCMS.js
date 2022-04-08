@@ -858,8 +858,14 @@ export async function getCategoryPageData(preview = false) {
     }
     if (categoryList && checkArrNotEmpty(categoryList)) {
         allProductListing = categoryList.filter(({ productInCategory }) => productInCategory && checkArrNotEmpty(productInCategory))
-            .map(({ productInCategory }) => productInCategory.map(({ productName, ...rest }) => ({
-                searchValue: productName, ...rest
+            .map(({ productInCategory }) => productInCategory.map(({ _id, productName, slug, headerImage }) => ({
+                searchValue: productName,
+                productName,
+                seoLinks: slug?.current ?? "",
+                id: _id,
+                headerImage: headerImage && {
+                    ...responsiveImgBuilder(headerImage)
+                }
             }))).flat();
     }
     // console.log("allProductListing", allProductListing)

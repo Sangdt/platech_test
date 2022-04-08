@@ -56,7 +56,7 @@ const ProductCategory = ({ pageTitle, categoryList,allProductListing, seoTag, sc
       </Box>
       <Container>
         <Box>
-          <SearchBar searchData={allProductListing} inputPlaceholder={"Tìm kiếm một sản phẩm nào đó"}/>
+          <SearchBar searchData={allProductListing.filter((v, i, a) => a.map(function (e) { return e.id; }).indexOf(v.id) === i)} inputPlaceholder={"Tìm kiếm một sản phẩm nào đó"}/>
           {categoryList && checkArrNotEmpty(categoryList) && categoryList.map((item, index) => (<Container>
             <Box>
               <ShowcaseGrid key={`${index}_${item.id}`} {...item} />

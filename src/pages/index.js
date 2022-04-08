@@ -29,7 +29,7 @@ const Index = ({ homePageData }) => {
         cardType: homePageData.seoTag.twitterCard,
       }}
     />}
-    <Elearning {...homePageData} />
+    {homePageData && <Elearning {...homePageData} />}
 
     {checkArrNotEmpty(homePageData.schema) && <>
       {homePageData.schema.map(shemaInfo => <GetSchemaJSON key={shemaInfo.id} shemaInfo={shemaInfo} />)}
