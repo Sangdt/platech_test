@@ -105,9 +105,9 @@ const mock = [
 
 const PromoNumbers = ({ pageTitle, shortDescription, IntroductionSections }) => {
   const theme = useTheme();
-  const isMd = useMediaQuery(theme.breakpoints.up('md'), {
-    defaultMatches: true,
-  });
+  // const isMd = useMediaQuery(theme.breakpoints.up('md'), {
+  //   defaultMatches: true,
+  // });
 
   return (
     <Box>
@@ -148,34 +148,27 @@ const PromoNumbers = ({ pageTitle, shortDescription, IntroductionSections }) => 
 
                   <Box
                     // component={Avatar}
-                    width={50}
-                    height={50}
+                    // width={50}
+                    // height={50}
                     marginBottom={2}
                     alignSelf={'center'}
                   // bgcolor={theme.palette.primary.main}
                   // color={theme.palette.background.paper}
                   >
-                    <span className="mb-6 w-16 h-16 inline-flex justify-center items-center bg-green-100 rounded text-2xl text-green-600 font-bold">{i + 1}</span>
-                  </Box>
-                  {/* <Typography
-                    variant={'h4'}
-                    color={'primary'}
-                    gutterBottom
-                    sx={{ fontWeight: 700 }}
-                  >
-                    {item.label}
-                  </Typography> */}
-                  <Typography
-                    textAlign={'center'}
-                    // variant={'h6'}
-                    gutterBottom
-                    sx={{ fontWeight: 500 }}
+                    <span className="w-full flex p-3 justify-center items-center bg-green-100 rounded text-2xl text-green-600 font-bold">
+                      <Typography
+                        textAlign={'center'}
+                        // variant={'h6'}
+                        gutterBottom
+                        sx={{ fontWeight: 500 }}
 
-                  >
-                    {item.label}
-                  </Typography>
+                      >
+                        {item.label}
+                      </Typography>
+                    </span>
+                  </Box>
                   <Typography textAlign={'center'}
-                    color={'primary'}
+                    // color={'primary'}
                     component={'div'}
                     dangerouslySetInnerHTML={{ __html: item.shortDescription }} />
                 </Box>

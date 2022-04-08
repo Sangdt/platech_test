@@ -47,7 +47,7 @@ const Subscription = () => {
           <Box
             display={'flex'}
             flexDirection={'column'}
-
+            justifyContent={"center"}
           >
             <Box marginBottom={4} justifyContent={'center'}
               alignItems={'center'}>
@@ -60,6 +60,7 @@ const Subscription = () => {
               >
                 Liên hệ với chúng tôi ngay để được báo giá và nhận được nhiều ưu đãi khác nhau
               </Typography>
+              {(inView || alreadyIn) &&<ContactForm />}
               {/* <Typography
                 variant="h6"
                 align={'center'}
@@ -70,8 +71,8 @@ const Subscription = () => {
                 upcoming news and updates.
               </Typography> */}
             </Box>
-            {(inView || alreadyIn) && <ContactForm />}
           </Box>
+
         </CardContent>
       </Box>
     </Box>

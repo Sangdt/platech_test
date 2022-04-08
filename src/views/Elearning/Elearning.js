@@ -9,7 +9,7 @@ import {
   Courses,
   Hero,
   PromoNumbers,
-  Reviews,
+  // Reviews,
   Subscription,
   VerticalMinimalDesignedBlogCards
 } from './components';

@@ -12,65 +12,65 @@ import CardActions from '@mui/material/CardActions';
 // import Avatar from '@mui/material/Avatar';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-import { colors } from '@mui/material';
+// import { colors } from '@mui/material';
 import { Image as DatoCMSImage } from "react-datocms"
 import Link from 'next/link'
 
 
-const mock = [
-  {
-    price: '$59 / month',
-    media: 'https://assets.maccarianagency.com/backgrounds/img5.jpg',
-    title: 'UX & web design',
-    tutor: 'Joshua Karamaki',
-    users: [
-      'https://assets.maccarianagency.com/avatars/img1.jpg',
-      'https://assets.maccarianagency.com/avatars/img2.jpg',
-      'https://assets.maccarianagency.com/avatars/img3.jpg',
-      'https://assets.maccarianagency.com/avatars/img4.jpg',
-      'https://assets.maccarianagency.com/avatars/img5.jpg',
-    ],
-  },
-  {
-    price: '$69 / month',
-    media: 'https://assets.maccarianagency.com/backgrounds/img6.jpg',
-    title: 'Software engineering',
-    tutor: 'Jhon Smith',
-    users: [
-      'https://assets.maccarianagency.com/avatars/img1.jpg',
-      'https://assets.maccarianagency.com/avatars/img2.jpg',
-      'https://assets.maccarianagency.com/avatars/img3.jpg',
-      'https://assets.maccarianagency.com/avatars/img4.jpg',
-      'https://assets.maccarianagency.com/avatars/img5.jpg',
-    ],
-  },
-  {
-    price: '$49 / month',
-    media: 'https://assets.maccarianagency.com/backgrounds/img7.jpg',
-    title: 'Graphic design for beginners',
-    tutor: 'Nicol Adams',
-    users: [
-      'https://assets.maccarianagency.com/avatars/img1.jpg',
-      'https://assets.maccarianagency.com/avatars/img2.jpg',
-      'https://assets.maccarianagency.com/avatars/img3.jpg',
-      'https://assets.maccarianagency.com/avatars/img4.jpg',
-      'https://assets.maccarianagency.com/avatars/img5.jpg',
-    ],
-  },
-  {
-    price: '$59 / month',
-    media: 'https://assets.maccarianagency.com/backgrounds/img9.jpg',
-    title: 'Marketing VS Sales',
-    tutor: 'Joshua Karamaki',
-    users: [
-      'https://assets.maccarianagency.com/avatars/img1.jpg',
-      'https://assets.maccarianagency.com/avatars/img2.jpg',
-      'https://assets.maccarianagency.com/avatars/img3.jpg',
-      'https://assets.maccarianagency.com/avatars/img4.jpg',
-      'https://assets.maccarianagency.com/avatars/img5.jpg',
-    ],
-  },
-];
+// const mock = [
+//   {
+//     price: '$59 / month',
+//     media: 'https://assets.maccarianagency.com/backgrounds/img5.jpg',
+//     title: 'UX & web design',
+//     tutor: 'Joshua Karamaki',
+//     users: [
+//       'https://assets.maccarianagency.com/avatars/img1.jpg',
+//       'https://assets.maccarianagency.com/avatars/img2.jpg',
+//       'https://assets.maccarianagency.com/avatars/img3.jpg',
+//       'https://assets.maccarianagency.com/avatars/img4.jpg',
+//       'https://assets.maccarianagency.com/avatars/img5.jpg',
+//     ],
+//   },
+//   {
+//     price: '$69 / month',
+//     media: 'https://assets.maccarianagency.com/backgrounds/img6.jpg',
+//     title: 'Software engineering',
+//     tutor: 'Jhon Smith',
+//     users: [
+//       'https://assets.maccarianagency.com/avatars/img1.jpg',
+//       'https://assets.maccarianagency.com/avatars/img2.jpg',
+//       'https://assets.maccarianagency.com/avatars/img3.jpg',
+//       'https://assets.maccarianagency.com/avatars/img4.jpg',
+//       'https://assets.maccarianagency.com/avatars/img5.jpg',
+//     ],
+//   },
+//   {
+//     price: '$49 / month',
+//     media: 'https://assets.maccarianagency.com/backgrounds/img7.jpg',
+//     title: 'Graphic design for beginners',
+//     tutor: 'Nicol Adams',
+//     users: [
+//       'https://assets.maccarianagency.com/avatars/img1.jpg',
+//       'https://assets.maccarianagency.com/avatars/img2.jpg',
+//       'https://assets.maccarianagency.com/avatars/img3.jpg',
+//       'https://assets.maccarianagency.com/avatars/img4.jpg',
+//       'https://assets.maccarianagency.com/avatars/img5.jpg',
+//     ],
+//   },
+//   {
+//     price: '$59 / month',
+//     media: 'https://assets.maccarianagency.com/backgrounds/img9.jpg',
+//     title: 'Marketing VS Sales',
+//     tutor: 'Joshua Karamaki',
+//     users: [
+//       'https://assets.maccarianagency.com/avatars/img1.jpg',
+//       'https://assets.maccarianagency.com/avatars/img2.jpg',
+//       'https://assets.maccarianagency.com/avatars/img3.jpg',
+//       'https://assets.maccarianagency.com/avatars/img4.jpg',
+//       'https://assets.maccarianagency.com/avatars/img5.jpg',
+//     ],
+//   },
+// ];
 
 const Spaces = ({ productList }) => {
   const theme = useTheme();
@@ -82,7 +82,7 @@ const Spaces = ({ productList }) => {
   return (
     <Box>
       <Box marginBottom={4}>
-        <Typography
+        {/* <Typography
           sx={{
             textTransform: 'uppercase',
             fontWeight: 'medium',
@@ -92,7 +92,7 @@ const Spaces = ({ productList }) => {
           align={'center'}
         >
           Popular courses
-        </Typography>
+        </Typography> */}
         <Typography
           variant="h4"
           align={'center'}
@@ -102,15 +102,7 @@ const Spaces = ({ productList }) => {
             fontWeight: 700,
           }}
         >
-          Browse our popular courses
-        </Typography>
-        <Typography
-          variant="h6"
-          align={'center'}
-          color={'text.secondary'}
-        // data-aos={'fade-up'}
-        >
-          Here are our popular course you might want to learn from your tutor.
+          Các sản phẩm mới
         </Typography>
         <Box
           display="flex"
@@ -119,43 +111,34 @@ const Spaces = ({ productList }) => {
           justifyContent={'center'}
           marginTop={2}
         >
-          <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            fullWidth={isMd ? false : true}
-            endIcon={
-              <Box
-                component={'svg'}
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                width={24}
-                height={24}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </Box>
-            }
-          >
-            View all
-          </Button>
-          <Box
-            component={Button}
-            variant="outlined"
-            color="primary"
-            size="large"
-            marginTop={{ xs: 2, sm: 0 }}
-            marginLeft={{ sm: 2 }}
-            fullWidth={isMd ? false : true}
-          >
-            Explore more
-          </Box>
+          <Link href={"/danh-muc-san-pham"} passHref>
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              fullWidth={isMd ? false : true}
+              endIcon={
+                <Box
+                  component={'svg'}
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  width={24}
+                  height={24}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
+                </Box>
+              }
+            >
+              Xem thêm
+            </Button>
+          </Link>
         </Box>
       </Box>
       <Box maxWidth={{ xs: 420, sm: 620, md: 1 }} margin={'0 auto'}>

@@ -13,10 +13,10 @@ const CaptchaButton = ({ onVerifyCaptcha }) => {
             console.log("executeRecaptcha none")
             return;
         }
-   
+
         const token = await executeRecaptcha('contact');
 
-        onVerifyCaptcha(token,e);
+        onVerifyCaptcha(token, e);
     };
 
     return (
@@ -24,14 +24,20 @@ const CaptchaButton = ({ onVerifyCaptcha }) => {
             onClick={clickHandler}
             // value=""
             id="contactFormSubmit"
-            className=" cursor-pointer text-2xl shadow bg-red-400 hover:bg-teal-400 focus:shadow-outline focus:outline-none text-black font-bold py-2 px-6 rounded"
+            className=" cursor-pointer text-2xl shadow bg-red-400 hover:bg-teal-400 focus:shadow-outline focus:outline-none  float-right text-black font-bold py-2 px-6 rounded"
         // type="submit" 
         >
             Gửi</button>
     );
 };
-const ContactFormBtn = ({ onVerifyCaptcha }) => (
+const ContactFormBtn = ({ onVerifyCaptcha, nonceValue }) => (
     <GoogleReCaptchaProvider
+        scriptProps={{
+            async: false, // optional, default to false,
+            defer: true, // optional, default to false
+            appendTo: 'body', // optional, default to "head", can be "head" or "body",
+            nonce: nonceValue  // optional, default undefined
+        }}
         reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
     >
         <CaptchaButton onVerifyCaptcha={onVerifyCaptcha} />
