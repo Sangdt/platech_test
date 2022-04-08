@@ -18,6 +18,7 @@ import 'styles/new_slide.css'
 // import 'aos/dist/aos.css';
 
 export default function App({ Component, pageProps }) {
+  console.log("SeoAndLayoutContent",SeoAndLayoutContent)
   return (
     <React.Fragment>
       <DefaultHeadTags {...SeoAndLayoutContent?.seo} />

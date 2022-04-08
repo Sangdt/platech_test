@@ -55,7 +55,7 @@ const nextConfig = {
     config.module.rules.push(
       {
         // val-loader for page layout
-        test: require.resolve('./src/Helper/pageLayoutCMSContent'),
+        test: require.resolve('./src/Helper/pageLayoutCMSContent.js'),
         use: [{ loader: 'val-loader' }]
       },
     )

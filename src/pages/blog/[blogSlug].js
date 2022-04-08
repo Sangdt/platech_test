@@ -8,7 +8,7 @@ import BlogArticle from 'views/BlogArticle';
 
 // import BlogWrapper from "@/components/Blog/Blogdetail/BlogWrapper";
 // import PageLoader from "@/SharedComponents/PageLoader";
-import { getAllBlogPath, getAllBlogWithCategoryPath, getBlogInfoBySlug } from "Helper/ServerAndBuild/callSanityCMS";
+import { getAllBlogPath, getBlogInfoBySlug } from "Helper/ServerAndBuild/callSanityCMS";
 import GetSchemaJSON from 'components/SharedComponents/GetSchemaJSON';
 import { checkArrNotEmpty } from 'Helper/checkArrNotEmpty';
 import { polyfill } from 'interweave-ssr';
