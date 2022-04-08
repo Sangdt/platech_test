@@ -37,6 +37,7 @@ const Hero = ({ pageTitle, headerImage, _publishedAt, _modelApiKey, location }) 
     layout={"fill"} 
     objectFit={"cover"} 
     objectPosition="50% 50%"
+    lazyLoad={false}
     />}
     {/* <Box
       sx={{
