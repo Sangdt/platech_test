@@ -1,7 +1,7 @@
 import Airtable from "airtable";
 import nc from 'next-connect';
 import { check, validationResult } from 'express-validator'
-import { NextApiRequest, NextApiResponse } from "next";
+// import { NextApiRequest, NextApiResponse } from "next";
 
 
 // import { CreateNewFormRow } from '@/components/Api/AirTable';
@@ -30,7 +30,7 @@ const handler = nc()
         check('captchaToken')
             .custom(async value => {
                 const params = new URLSearchParams();
-                params.append('secret', process.env.RECAPTCHA_SECRET_KEY);
+                params.append('secret', process.env.NEXT_PUBLIC_RECAPTCHA_SECRET_KEY);
                 params.append('response', value);
                 const res = await fetch('https://www.google.com/recaptcha/api/siteverify',
                     {
@@ -49,7 +49,7 @@ const handler = nc()
                         score,
                         hostname,
                         rest,
-                        RECAPTCHA_SECRET_KEY: process.env.RECAPTCHA_SECRET_KEY
+                        NEXT_PUBLIC_RECAPTCHA_SECRET_KEY: process.env.NEXT_PUBLIC_RECAPTCHA_SECRET_KEY
                     });
                     return Promise.reject(`Wrong captcha info or sth bruhhhh `);
                 }
@@ -66,17 +66,17 @@ const handler = nc()
     ], validationResult))
     .post(async (req, res) => {
         // console.log("req headers", req.headers["x-real-ip"], req.connection.remoteAddress,req.headers)
-        let returnData;
+        // let returnData;
         const { fullName,
             phoneNumber,
             Email,
-            captchaToken,
+            // captchaToken,
             productName,
             clientSupportInfo } = req.body
         // console.log("test",captchaToken);
         // res.status(200).json({ "success": true, createdRecords: captchaToken })
         try {
-            returnData = await new Promise(resolve => {
+            await new Promise(resolve => {
                 var base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base('app7uqXAQYV28WaQF');
                 base('Form Liên Hệ').create({
                     "Họ và Tên": fullName,
@@ -94,7 +94,7 @@ const handler = nc()
                     //console.log(record.getId());
                 });
             })
-            res.status(200).json({ "success": true, createdRecords: returnData })
+            res.status(200).json({ "success": true })
         } catch (error) {
             console.error("error", error);
             res.status(400).json({ "success": false, message: "Internal server error" })

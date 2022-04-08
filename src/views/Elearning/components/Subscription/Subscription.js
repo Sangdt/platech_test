@@ -1,9 +1,11 @@
 /* eslint-disable react/no-unescaped-entities */
-import React, { useEffect, useState } from 'react';
+import React, {useState } from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import CircularProgress from '@mui/material/CircularProgress';
+
 // import Button from '@mui/material/Button';
 // import FormControl from '@mui/material/FormControl';
 // import OutlinedInput from '@mui/material/OutlinedInput';
@@ -16,12 +18,12 @@ const ContactForm = dynamic(() => import(
   'components/SharedComponents/ContactForm').then(m => m.default),
   {
     ssr: false,
-    // loading: () => <div className="flex flex-wrap "><SliderLoader className={"mx-auto"} /></div>,
+    loading: () => <div className="max-w-2xl mx-auto"><CircularProgress className='mx-auto'/></div>,
   });
 const Subscription = () => {
   // const theme = useTheme();
   const [alreadyIn, setAlreadyIn] = useState(false);
-  const { observe, unobserve, inView, scrollDirection, entry } = useInView({
+  const { observe, inView } = useInView({
     threshold: 0.25, // Default is 0
     // onChange: ({ inView, scrollDirection, entry, observe, unobserve }) => {
     //   // Triggered whenever the target meets a threshold, e.g. [0.25, 0.5, ...]
