@@ -15,10 +15,10 @@ import 'styles/new_slide.css'
 // import 'slick-carousel/slick/slick-theme.css';
 // import 'react-image-lightbox/style.css';
 // import 'aos/dist/aos.css';
-
-export default function App({ Component, pageProps, UA }) {
-
-  console.log("App pageProps for UA", pageProps)
+// let clientUA;
+export default function App({ Component, pageProps }) {
+  // if (UA) clientUA = UA;
+  // console.log("App pageProps for UA", pageProps)
 
   // console.log("SeoAndLayoutContent",SeoAndLayoutContent)
   return (
@@ -32,8 +32,8 @@ export default function App({ Component, pageProps, UA }) {
         <title>theFront | UI Kit by Maccarian Agency.</title>
       </Head> */}
       <Page>
-        <Main {...SeoAndLayoutContent} UA={UA}>
-          <Component {...pageProps} UA={UA} />
+        <Main {...SeoAndLayoutContent}>
+          <Component {...pageProps}  />
         </Main>
       </Page>
     </React.Fragment>

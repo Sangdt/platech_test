@@ -21,7 +21,7 @@ import {
 const Sidebar = dynamic(() => import(  /* webpackChunkName: "Sidebar" */'./components/Sidebar/Sidebar'));
 
 const Main = ({ children, colorInvert = false, bgcolor = 'transparent', salesInfo = false, pageHeader, footer, showSaleInfo, setShowSaleInfo,UA }) => {
-  console.log("footer",UA)
+  // console.log("footer",UA)
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,

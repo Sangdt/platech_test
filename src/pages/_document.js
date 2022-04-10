@@ -142,6 +142,7 @@ MyDocument.getInitialProps = async (ctx) => {
   // 2. page.getInitialProps
   // 3. app.render
   // 4. page.render
+  const docProps = await ctx.defaultGetInitialProps(ctx)
 
   // Render app and page and get the context of the page with collected side effects.
   const originalRenderPage = ctx.renderPage;
@@ -172,7 +173,8 @@ MyDocument.getInitialProps = async (ctx) => {
       },
     });
 
-  const initialProps = await ctx.defaultGetInitialProps(ctx, { nonce })
+  const initialProps = await Document.getInitialProps(ctx, { nonce });
+  // console.log("initialProps",initialProps)
   const emotionStyles = extractCriticalToChunks(initialProps.html);
   // console.log("emotionStyles",emotionStyles.styles.length)
   const emotionStyleTags = emotionStyles.styles.map((style) => (
@@ -188,6 +190,8 @@ MyDocument.getInitialProps = async (ctx) => {
 
   return {
     ...initialProps,
+    ...docProps,
+    UA,
     // Styles fragment is rendered after the app and page rendering finish.
     styles: [
       ...React.Children.toArray(initialProps.styles),
