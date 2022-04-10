@@ -161,11 +161,11 @@ MyDocument.getInitialProps = async (ctx) => {
       //   )
       // },
       enhanceApp: (App) => (props) => {
-        console.log("UA",UA)
         const { pageProps, ...rest } = props;
         const enhancedPageProps = {
           ...pageProps, UA
         }
+        console.log("enhanced PageProps with UA", enhancedPageProps)
         return <CacheProvider value={cache}>
           <App  {...{ ...rest, pageProps: { ...enhancedPageProps } }} UA={UA} />
         </CacheProvider>;
