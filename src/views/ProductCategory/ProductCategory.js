@@ -27,8 +27,8 @@ const PageHeader = ({ pageTitle, pageDescription }) => {
   </div>
   );
 }
-const ProductCategory = ({ pageTitle, categoryList,allProductListing, seoTag, schema, pageDescription }) => {
-  const theme = useTheme();
+const ProductCategory = ({ pageTitle, categoryList, allProductListing, seoTag, schema, pageDescription }) => {
+  // const theme = useTheme();
   return (
     <>
       <Box bgcolor={'alternate.main'}>
@@ -56,16 +56,16 @@ const ProductCategory = ({ pageTitle, categoryList,allProductListing, seoTag, sc
       </Box>
       <Container>
         <Box>
-          <SearchBar searchData={allProductListing.filter((v, i, a) => a.map(function (e) { return e.id; }).indexOf(v.id) === i)} inputPlaceholder={"Tìm kiếm một sản phẩm nào đó"}/>
-          {categoryList && checkArrNotEmpty(categoryList) && categoryList.map((item, index) => (<Container>
+          <SearchBar searchData={allProductListing} inputPlaceholder={"Tìm kiếm một sản phẩm nào đó"} />
+          {categoryList && checkArrNotEmpty(categoryList) && categoryList.map((item, index) => (<Container key={`${index}_${item.id}`}>
             <Box>
-              <ShowcaseGrid key={`${index}_${item.id}`} {...item} />
+              <ShowcaseGrid  {...item} />
             </Box>
           </Container>))}
         </Box>
         {/* <Result /> */}
       </Container>
-      <Box
+      {/* <Box
         position={'relative'}
         marginTop={{ xs: 4, md: 6 }}
         sx={{
@@ -94,10 +94,10 @@ const ProductCategory = ({ pageTitle, categoryList,allProductListing, seoTag, sc
             d="M0,0c0,0,934.4,93.4,1920,0v100.1H0L0,0z"
           ></path>
         </Box>
-        <Container>
+         <Container>
           <Newsletter />
-        </Container>
-      </Box>
+        </Container> *
+      </Box> */}
     </>
   );
 };

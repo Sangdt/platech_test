@@ -1,10 +1,11 @@
 /* eslint-disable react/display-name */
 import React from 'react';
-import Document, { Html, Head, Main, NextScript  } from 'next/document';
+import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
 import createEmotionServer from '@emotion/server/create-instance';
-import flush from 'styled-jsx/server'
+// import flush from 'styled-jsx/server'
+import parser from 'ua-parser-js'
 
 import { nanoid } from 'nanoid'
 import {
@@ -84,23 +85,24 @@ export default class MyDocument extends Document {
         </Head>
         <body>
           <Main />
-          <NextScript nonce={this.props.nonce}  />
+          <NextScript nonce={this.props.nonce} />
         </body>
       </Html>
     );
   }
 }
+let UA;
 
 // `getInitialProps` belongs to `_document` (instead of `_app`),
 // it's compatible with static-site generation (SSG).
 MyDocument.getInitialProps = async (ctx) => {
-  console.log("document ctx",ctx?.res);
+  // console.log("document ctx",ctx?.res?.get('User-Agent'));
   const nonce = nanoid(10);
-  const styles = [...flush({ nonce })]
+  // const styles = [...flush({ nonce })]
   const getCache = () => {
     const cache = createCache({
-      key: 'css', 
-      prepend: true, 
+      key: 'css',
+      prepend: true,
       nonce: nonce,
     });
     // cache.compat = true;
@@ -108,8 +110,11 @@ MyDocument.getInitialProps = async (ctx) => {
     return cache;
   };
   if (typeof ctx?.res?.setHeader !== "undefined") {
+    UA = ctx?.req.headers['user-agent']
+    // console.log("document ctx", ctx?.req.headers['user-agent'] );
     ctx.res.setHeader('Content-Security-Policy', getCsp(nonce))
   } else if (typeof ctx?.res?.writeHead !== "undefined") {
+    UA = ctx?.req.headers['user-agent']
     ctx.res.writeHead(200,
       { 'Content-Security-Policy': getCsp(nonce) })
   }
@@ -143,23 +148,31 @@ MyDocument.getInitialProps = async (ctx) => {
 
   const cache = getCache();
   const { extractCriticalToChunks } = createEmotionServer(cache);
-  // console.log("cache",cache)
+  // console.log("UA", UA)
   ctx.renderPage = () =>
     originalRenderPage({
       // Take precedence over the CacheProvider in our custom _app.js
-      enhanceComponent: (Component) => (props) => (
-        <CacheProvider value={cache}>
-          <Component {...props} />
-        </CacheProvider>
-      ),
-      // enhanceApp: (App) => function EnhanceApp(props) {
-      //   return <CacheProvider value={cache}>
-      //     <App {...props} />
-      //     </CacheProvider>;
+      // enhanceComponent: (Component) => (props) => {
+      //   // console.log("props",props)
+      //   return (
+      //     <CacheProvider value={cache}>
+      //       <Component {...{ ...props, UA }} />
+      //     </CacheProvider>
+      //   )
       // },
+      enhanceApp: (App) => (props) => {
+        console.log("UA",UA)
+        const { pageProps, ...rest } = props;
+        const enhancedPageProps = {
+          ...pageProps, UA
+        }
+        return <CacheProvider value={cache}>
+          <App  {...{ ...rest, pageProps: { ...enhancedPageProps } }} UA={UA} />
+        </CacheProvider>;
+      },
     });
 
-  const initialProps =await ctx.defaultGetInitialProps(ctx, { nonce })
+  const initialProps = await ctx.defaultGetInitialProps(ctx, { nonce })
   const emotionStyles = extractCriticalToChunks(initialProps.html);
   // console.log("emotionStyles",emotionStyles.styles.length)
   const emotionStyleTags = emotionStyles.styles.map((style) => (

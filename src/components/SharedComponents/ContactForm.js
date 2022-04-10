@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 // import BlockUi from 'react-block-ui';
 import { useTheme } from '@mui/material/styles';
+import 'react-toastify/dist/ReactToastify.css';
 
 // import 'react-block-ui/style.css';
 import ContactFormBtn from './ReCaptchaComponent/ContactFormBtn';

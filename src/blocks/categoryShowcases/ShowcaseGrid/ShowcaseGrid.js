@@ -49,7 +49,7 @@ import { Image } from 'react-datocms';
 // ];
 
 const ShowcaseGrid = ({ categoryName, id, productInCategory, seoLink }) => {
-  console.log("categoryList", categoryName, id, productInCategory, seoLink)
+  // console.log("categoryList", categoryName, id, productInCategory, seoLink)
   return (
     <Box bgcolor={'alternate.main'}>
       <Container>
@@ -66,8 +66,8 @@ const ShowcaseGrid = ({ categoryName, id, productInCategory, seoLink }) => {
   );
 };
 
-const SingleProductGrid = ({ seoLinks, headerImage, price, productName, searchResultDisplay = false }) => (<Grid item xs={12} sm={6} md={4} margin={5}>
-  <Box width={1} height={1} position={'relative'} paddingTop={searchResultDisplay ?"":"5"}>
+const SingleProductGrid = ({ seoLinks, headerImage, price, productName, searchResultDisplay = false }) => (<Grid item xs={12} sm={6} md={4} margin={searchResultDisplay ? 5 : ""}>
+  <Box width={1} height={1} position={'relative'} paddingTop={searchResultDisplay ? "" : "5"}>
     {headerImage?.responsiveImage && <Image
       data={headerImage.responsiveImage}
       // src={item.image}
@@ -111,8 +111,8 @@ const SingleProductGrid = ({ seoLinks, headerImage, price, productName, searchRe
     </Box>
   </Box>
 </Grid>);
-export default ShowcaseGrid;
 
+export default ShowcaseGrid;
 export {
   SingleProductGrid
 }

@@ -866,7 +866,7 @@ export async function getCategoryPageData(preview = false) {
                 headerImage: headerImage && {
                     ...responsiveImgBuilder(headerImage)
                 }
-            }))).flat();
+            }))).flat().filter((v, i, a) => a.map(function (e) { return e.id; }).indexOf(v.id) === i);
     }
     // console.log("allProductListing", allProductListing)
     return {

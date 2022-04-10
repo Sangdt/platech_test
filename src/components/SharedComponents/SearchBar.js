@@ -13,7 +13,7 @@ import Grid from '@mui/material/Grid';
 import Container from 'components/Container';
 
 const ProductSearchResultModal = dynamic(() => import(
-    /* webpackChunkName: "ContactForm" */
+    /* webpackChunkName: "ProductSearchResultModal" */
     /* webpackMode: "lazy" */
     'components/SharedComponents/Modal/SearchResultModal').then(m => m.SearchResultModal),
     {
