@@ -27,18 +27,13 @@ const Hero = ({ pageTitle, headerImage, _publishedAt, _modelApiKey, location }) 
 
   return (<Box
     position={'relative'}
-    minHeight={{ xs: 400, sm: 500, md: 600 }}
+    minHeight={{ xs: 400, sm: 500, md: 400 }}
     display={'flex'}
     marginTop={-13}
     paddingTop={13}
     alignItems={'center'}
   >
-    {(headerImage && headerImage.responsiveImage) && <Image data={headerImage.responsiveImage} 
-    layout={"fill"} 
-    objectFit={"cover"} 
-    objectPosition="50% 50%"
-    lazyLoad={false}
-    />}
+
     {/* <Box
       sx={{
         position: 'absolute',
@@ -82,6 +77,12 @@ const Hero = ({ pageTitle, headerImage, _publishedAt, _modelApiKey, location }) 
             }}
           />
         </Box>
+        {(headerImage && headerImage.responsiveImage) && <Image data={headerImage.responsiveImage}
+        // layout={"fill"} 
+        // objectFit={"cover"} 
+        objectPosition="50% 50%"
+        // lazyLoad={false}
+        />}
       </Box>
     </Container >
   </Box>

@@ -20,8 +20,8 @@ import Divider from '@mui/material/Divider';
 // import FacebookIcon from '@mui/icons-material/Facebook';
 // import TwitterIcon from '@mui/icons-material/Twitter';
 // import InstagramIcon from '@mui/icons-material/Instagram';
-import Interweave, { ALLOWED_TAG_LIST } from 'interweave';
-import { transform } from './BlogContentComponents/transform';
+// import Interweave, { ALLOWED_TAG_LIST } from 'interweave';
+// import { transform } from './BlogContentComponents/transform';
 // import filter from './BlogContentComponents/CustomFilter';
 // import LinkFilter from './BlogContentComponents/CustomFilter';
 
@@ -72,7 +72,8 @@ const Content = ({blogBody}) => {
         </Typography>
 
         <BlogPostHeaderImage /> */}
-        <Interweave
+        <Box component={"div"} dangerouslySetInnerHTML={{__html:blogBody}}/>
+        {/* <Interweave
           allowAttributes={true}
           allowList={[...ALLOWED_TAG_LIST, 'iframe']}
           content={blogBody}
@@ -81,7 +82,7 @@ const Content = ({blogBody}) => {
           transform={transform}
           // matchers={[new CustomURLMatcher('url')]}
           // escapeHtml
-        />
+        /> */}
         {/* <CustomBlogForm /> */}
 
         {/* <EndBlogNoted /> */}

@@ -91,13 +91,13 @@ export default class MyDocument extends Document {
     );
   }
 }
-let UA;
 
 // `getInitialProps` belongs to `_document` (instead of `_app`),
 // it's compatible with static-site generation (SSG).
 MyDocument.getInitialProps = async (ctx) => {
   // console.log("document ctx",ctx?.res?.get('User-Agent'));
   const nonce = nanoid(10);
+  let UA;
   // const styles = [...flush({ nonce })]
   const getCache = () => {
     const cache = createCache({
@@ -142,7 +142,6 @@ MyDocument.getInitialProps = async (ctx) => {
   // 2. page.getInitialProps
   // 3. app.render
   // 4. page.render
-  const docProps = await ctx.defaultGetInitialProps(ctx)
 
   // Render app and page and get the context of the page with collected side effects.
   const originalRenderPage = ctx.renderPage;
@@ -153,28 +152,22 @@ MyDocument.getInitialProps = async (ctx) => {
   ctx.renderPage = () =>
     originalRenderPage({
       // Take precedence over the CacheProvider in our custom _app.js
-      // enhanceComponent: (Component) => (props) => {
-      //   // console.log("props",props)
-      //   return (
-      //     <CacheProvider value={cache}>
-      //       <Component {...{ ...props, UA }} />
-      //     </CacheProvider>
-      //   )
-      // },
-      enhanceApp: (App) => (props) => {
-        const { pageProps, ...rest } = props;
-        const enhancedPageProps = {
-          ...pageProps, UA
-        }
-        console.log("enhanced PageProps with UA", enhancedPageProps)
-        return <CacheProvider value={cache}>
-          <App  {...{ ...rest, pageProps: { ...enhancedPageProps } }} UA={UA} />
-        </CacheProvider>;
+      enhanceComponent: (Component) => (props) => {
+        // console.log("props",props)
+        return (
+          <CacheProvider value={cache}>
+            <Component {...{ ...props, UA }} />
+          </CacheProvider>
+        )
       },
+      // enhanceApp: (App) => function EnhanceApp(props) {
+      //   return <CacheProvider value={cache}>
+      //     <App {...props} />
+      //     </CacheProvider>;
+      // },
     });
 
-  const initialProps = await Document.getInitialProps(ctx, { nonce });
-  // console.log("initialProps",initialProps)
+  const initialProps = await ctx.defaultGetInitialProps(ctx, { nonce })
   const emotionStyles = extractCriticalToChunks(initialProps.html);
   // console.log("emotionStyles",emotionStyles.styles.length)
   const emotionStyleTags = emotionStyles.styles.map((style) => (
@@ -190,8 +183,6 @@ MyDocument.getInitialProps = async (ctx) => {
 
   return {
     ...initialProps,
-    ...docProps,
-    UA,
     // Styles fragment is rendered after the app and page rendering finish.
     styles: [
       ...React.Children.toArray(initialProps.styles),

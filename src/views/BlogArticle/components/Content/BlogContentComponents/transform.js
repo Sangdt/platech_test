@@ -27,7 +27,7 @@ export function transform(node, children) {
       break;
     case 'iframe':
       return (<LazyLoadingIframe >
-        <iframe src={node.getAttribute('src')} className={node.getAttribute('class')}></iframe>
+        <iframe title='BlogPageIframes' src={node.getAttribute('src')} className={node.getAttribute('class')}></iframe>
       </LazyLoadingIframe>);
     // case 'blockquote':
     //   return (<Typography variant={'caption'} id={node.getAttribute('id')} color={'primary'} align={'center'} fontSize={'h6.fontSize'} mb={2}>

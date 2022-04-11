@@ -11,14 +11,14 @@ import BlogArticle from 'views/BlogArticle';
 import { getAllBlogPath, getBlogInfoBySlug } from "Helper/ServerAndBuild/callSanityCMS";
 import GetSchemaJSON from 'components/SharedComponents/GetSchemaJSON';
 import { checkArrNotEmpty } from 'Helper/checkArrNotEmpty';
-import { polyfill } from 'interweave-ssr';
+// import { polyfill } from 'interweave-ssr';
 
-if (typeof window === 'undefined') {
-    polyfill();
-}
+// if (typeof window === 'undefined') {
+//     polyfill();
+// }
 
 const SinglePost = ({ blogInfo }) => {
-    console.log("blogInfo", blogInfo)
+    // console.log("blogInfo", blogInfo)
     const router = useRouter();
     //   if (router.isFallback) {
     //     return <div className="container mx-auto w-full ">
@@ -80,6 +80,7 @@ export async function getStaticProps({ params, preview = false }) {
     }
 
 }
+
 export async function getStaticPaths() {
     let allBlogs = await getAllBlogPath();
 
@@ -99,4 +100,5 @@ export async function getStaticPaths() {
         // ],
     };
 }
+
 export default SinglePost;

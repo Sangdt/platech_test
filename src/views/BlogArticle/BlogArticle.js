@@ -11,11 +11,11 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import Container from 'components/Container';
 import {
   Content,
-  FooterNewsletter,
+  // FooterNewsletter,
   Hero,
   // SidebarArticles,
   // SidebarNewsletter,
-  SimilarStories,
+  // SimilarStories,
 } from './components';
 import dynamic from 'next/dynamic';
 
@@ -95,7 +95,7 @@ const BlogArticle = ({ useToc, location, contactForm, blogDateTime, pageTitle, i
         ></path>
       </Box>
     </Box>
-    <Box bgcolor={'alternate.main'}>
+    {/* <Box bgcolor={'alternate.main'}>
       <Container>
         <SimilarStories />
       </Container>
@@ -119,7 +119,7 @@ const BlogArticle = ({ useToc, location, contactForm, blogDateTime, pageTitle, i
           d="M0,0c0,0,934.4,93.4,1920,0v100.1H0L0,0z"
         ></path>
       </Box>
-    </Box>
+    </Box> */}
   </>
   );
 };

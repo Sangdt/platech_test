@@ -9,9 +9,9 @@ import { getHomepageData } from "Helper/ServerAndBuild/callSanityCMS";
 // import Home from "components/HomePage/index";
 import GetSchemaJSON from 'components/SharedComponents/GetSchemaJSON';
 import { checkArrNotEmpty } from 'Helper/checkArrNotEmpty';
-const Index = ({ homePageData,...rest }) => {
+const Index = ({ homePageData, ...rest }) => {
   const router = useRouter();
-  console.log("homePageData from index",rest);
+  console.log("homePageData from index", rest);
   return <>
     {homePageData.seoTag && <NextSeo
       title={homePageData.seoTag.title}
@@ -42,7 +42,7 @@ const Index = ({ homePageData,...rest }) => {
 
 export async function getStaticProps(context) {
   const homePageData = await getHomepageData();
-  console.log("test",context);
+  console.log("test", context);
   return {
     props: { homePageData }, // will be passed to the page component as props
     revalidate: 1200
