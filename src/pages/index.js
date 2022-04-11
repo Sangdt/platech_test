@@ -11,7 +11,7 @@ import GetSchemaJSON from 'components/SharedComponents/GetSchemaJSON';
 import { checkArrNotEmpty } from 'Helper/checkArrNotEmpty';
 const Index = ({ homePageData, ...rest }) => {
   const router = useRouter();
-  console.log("homePageData from index", rest);
+  // console.log("homePageData from index", rest);
   return <>
     {homePageData.seoTag && <NextSeo
       title={homePageData.seoTag.title}

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { alpha, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 
 // import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
@@ -53,7 +53,7 @@ const NavItem = ({ linkTo, title, itemName, id, items, colorInvert = false }) =>
 
   useEffect(() => {
     // setY(window.scrollY);
-    window.addEventListener("scroll", handleNavigation);
+    window.addEventListener("scroll", handleNavigation, { passive: true });
 
     return () => {
       window.removeEventListener("scroll", handleNavigation);
