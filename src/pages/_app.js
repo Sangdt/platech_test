@@ -16,9 +16,9 @@ import 'styles/new_slide.css'
 // import 'react-image-lightbox/style.css';
 // import 'aos/dist/aos.css';
 // let clientUA;
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps,UA }) {
   // if (UA) clientUA = UA;
-  // console.log("App pageProps for UA", pageProps)
+  console.log("App pageProps for UA", UA)
 
   // console.log("SeoAndLayoutContent",SeoAndLayoutContent)
   return (

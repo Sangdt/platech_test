@@ -162,7 +162,7 @@ MyDocument.getInitialProps = async (ctx) => {
       enhanceApp: (App) => (props) =>
       (
         <CacheProvider value={cache}>
-          <App {...props} />
+          <App {...props} UA={UA} />
         </CacheProvider>
       ),
     });

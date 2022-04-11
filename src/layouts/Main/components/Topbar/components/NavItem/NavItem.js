@@ -53,7 +53,7 @@ const NavItem = ({ linkTo, title, itemName, id, items, colorInvert = false }) =>
 
   useEffect(() => {
     // setY(window.scrollY);
-    window.addEventListener("scroll", handleNavigation, { passive: true });
+    window.addEventListener("scroll", handleNavigation);
 
     return () => {
       window.removeEventListener("scroll", handleNavigation);
@@ -65,8 +65,10 @@ const NavItem = ({ linkTo, title, itemName, id, items, colorInvert = false }) =>
     <Box
       aria-owns={openedPopoverId ? 'mouse-over-popover' : undefined}
       aria-haspopup="true"
-      onMouseEnter={(e) => handlePopoverOpen(e, id)}
-      onMouseLeave={handlePopoverClose}
+      // onMouseEnter={(e) => handlePopoverOpen(e, id)}
+      // onMouseLeave={e => handlePopoverClose(e)}
+      // onMouseEnter={(e) => handlePopoverOpen(e, id)}
+      // onMouseLeave={handlePopoverClose}
       aria-describedby={id}
     >
       <Box
@@ -74,9 +76,9 @@ const NavItem = ({ linkTo, title, itemName, id, items, colorInvert = false }) =>
         display={'flex'}
         alignItems={'center'}
         sx={{ cursor: 'pointer' }}
-      // onClick={(e) => handlePopoverOpen(e, id)}
+        onClick={(e) => handlePopoverOpen(e, id)}
       >
-        {linkTo?.seoLinks ? <Link passHref href={linkTo?.seoLinks}>
+        {/* {linkTo?.seoLinks ? <Link passHref href={linkTo?.seoLinks}>
           <Typography
             component='a'
             fontWeight={openedPopoverId === id || 400}
@@ -84,17 +86,18 @@ const NavItem = ({ linkTo, title, itemName, id, items, colorInvert = false }) =>
           >
             {title}
           </Typography>
-        </Link> : <Typography
-          onMouseEnter={(e) => handlePopoverOpen(e, id)}
-          onMouseLeave={handlePopoverClose}
+        </Link> :  */}
+        <Typography
+          // onMouseEnter={(e) => handlePopoverOpen(e, id)}
+          // onMouseLeave={handlePopoverClose}
           // component='a'
           fontWeight={openedPopoverId === id || 400}
           color={linkColor}
         >
           {title}
-        </Typography>}
+        </Typography>
 
-        <ExpandMoreIcon
+        {checkArrNotEmpty(items) && <ExpandMoreIcon
           sx={{
             marginLeft: theme.spacing(1 / 4),
             width: 16,
@@ -102,7 +105,7 @@ const NavItem = ({ linkTo, title, itemName, id, items, colorInvert = false }) =>
             transform: openedPopoverId === id ? 'rotate(180deg)' : 'none',
             color: linkColor
           }}
-        />
+        />}
       </Box>
       {(openedPopoverId === id) && (checkArrNotEmpty(items)) && <Popover
         disableScrollLock={true}
