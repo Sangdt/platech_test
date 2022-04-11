@@ -105,8 +105,7 @@ MyDocument.getInitialProps = async (ctx) => {
       prepend: true,
       nonce: nonce,
     });
-    // cache.compat = true;
-
+    cache.compat = true;
     return cache;
   };
   if (typeof ctx?.res?.setHeader !== "undefined") {
@@ -152,22 +151,23 @@ MyDocument.getInitialProps = async (ctx) => {
   ctx.renderPage = () =>
     originalRenderPage({
       // Take precedence over the CacheProvider in our custom _app.js
-      enhanceComponent: (Component) => (props) => {
-        // console.log("props",props)
-        return (
-          <CacheProvider value={cache}>
-            <Component {...{ ...props, UA }} />
-          </CacheProvider>
-        )
-      },
-      // enhanceApp: (App) => function EnhanceApp(props) {
-      //   return <CacheProvider value={cache}>
-      //     <App {...props} />
-      //     </CacheProvider>;
+      // enhanceComponent: (Component) => (props) => {
+      //   // console.log("props",props)
+      //   return (
+      //     <CacheProvider value={cache}>
+      //       <Component {...{ ...props, UA }} />
+      //     </CacheProvider>
+      //   )
       // },
+      enhanceApp: (App) => (props) =>
+      (
+        <CacheProvider value={cache}>
+          <App {...props} />
+        </CacheProvider>
+      ),
     });
 
-  const initialProps = await ctx.defaultGetInitialProps(ctx, { nonce })
+  const initialProps = await Document.getInitialProps(ctx);
   const emotionStyles = extractCriticalToChunks(initialProps.html);
   // console.log("emotionStyles",emotionStyles.styles.length)
   const emotionStyleTags = emotionStyles.styles.map((style) => (

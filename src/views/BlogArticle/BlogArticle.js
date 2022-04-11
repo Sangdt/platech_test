@@ -71,7 +71,7 @@ const BlogArticle = ({ useToc, location, contactForm, blogDateTime, pageTitle, i
               // paddingBottom: '40px',
               zIndex: 5,
             }}>
-              <SidebarArticles />
+              <SidebarArticles relativeBlog={relativeBlog} />
             </Box>
 
           </Grid>) : null}
