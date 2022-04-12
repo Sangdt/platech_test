@@ -30,7 +30,7 @@ const Hero = ({ pageTitle, headerImage, _publishedAt, _modelApiKey, location }) 
     minHeight={{ xs: 400, sm: 500, md: 400 }}
     display={'flex'}
     marginTop={-13}
-    paddingTop={13}
+    // paddingTop={13}
     alignItems={'center'}
   >
 
@@ -80,7 +80,7 @@ const Hero = ({ pageTitle, headerImage, _publishedAt, _modelApiKey, location }) 
         {(headerImage && headerImage.responsiveImage) && <Image data={headerImage.responsiveImage}
         // layout={"fill"} 
         // objectFit={"cover"} 
-        objectPosition="50% 50%"
+        // objectPosition="50% 50%"
         // lazyLoad={false}
         />}
       </Box>

@@ -153,7 +153,7 @@ const nextConfig = {
 
 module.exports = withPlugins([
   [withBundleAnalyzer],
-  [withPreact]
+  // [withPreact]
   // withClientScripts({
   //   '/': './Helper/clientScripts/index.js'
   // }),

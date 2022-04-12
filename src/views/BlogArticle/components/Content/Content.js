@@ -7,7 +7,7 @@ import Divider from '@mui/material/Divider';
 
 const Content = ({ blogBody }) => (
   <Box paddingX={1}>
-    <Box paddingX={{ xs: 0, sm: 4, md: 6 }}>
+    <Box paddingX={{ xs: 0, sm: 0, md: 0 }}>
       <Box component={"div"} dangerouslySetInnerHTML={{ __html: blogBody }} />
       <Box paddingY={4}>
         <Divider />

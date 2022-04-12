@@ -54,9 +54,9 @@ const BlogArticle = ({ useToc, location, contactForm, blogDateTime, pageTitle, i
             <SidebarNewsletter />
           </Grid>}
 
-          <Grid item xs={12} md={6} paddingTop={5}>
+          {blogBody && <Grid item xs={12} md={6} paddingTop={0}>
             <Content blogBody={blogBody} contactForm={contactForm} />
-          </Grid>
+          </Grid>}
 
           {isMd && useToc ? (<Grid item xs={12} md={3} paddingTop={'40px'}>
             <Box marginBottom={4} sx={{

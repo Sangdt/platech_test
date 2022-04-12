@@ -32,7 +32,13 @@ function getCsp(nonce) {
   csp += `worker-src  'self' blob:`
   return csp;
 }
+const nonce = nanoid(10);
 
+const emotionCache = createCache({
+  key: 'css',
+  prepend: true,
+  nonce: nonce,
+});
 
 export default class MyDocument extends Document {
   render() {
@@ -55,18 +61,10 @@ export default class MyDocument extends Document {
 // it's compatible with static-site generation (SSG).
 MyDocument.getInitialProps = async (ctx) => {
   // console.log("document ctx",ctx?.res?.get('User-Agent'));
-  const nonce = nanoid(10);
+  emotionCache.compat = true;
   let UA;
   // const styles = [...flush({ nonce })]
-  const getCache = () => {
-    const cache = createCache({
-      key: 'css',
-      prepend: true,
-      nonce: nonce,
-    });
-    cache.compat = true;
-    return cache;
-  };
+
   if (typeof ctx?.res?.setHeader !== "undefined") {
     UA = ctx?.req.headers['user-agent']
     // console.log("document ctx", ctx?.req.headers['user-agent'] );
@@ -104,8 +102,7 @@ MyDocument.getInitialProps = async (ctx) => {
   // Render app and page and get the context of the page with collected side effects.
   const originalRenderPage = ctx.renderPage;
 
-  const cache = getCache();
-  const { extractCriticalToChunks } = createEmotionServer(cache);
+  const { extractCriticalToChunks } = createEmotionServer(emotionCache);
   // console.log("UA", UA)
   ctx.renderPage = () =>
     originalRenderPage({
@@ -120,16 +117,16 @@ MyDocument.getInitialProps = async (ctx) => {
       // },
       enhanceApp: (App) => (props) =>
       (
-        <CacheProvider value={cache}>
+        <CacheProvider value={emotionCache}>
           <App {...props} UA={UA} />
         </CacheProvider>
       ),
     });
 
   const initialProps = await Document.getInitialProps(ctx);
-  const emotionStyles = extractCriticalToChunks(initialProps.html);
-  // console.log("emotionStyles",emotionStyles.styles.length)
-  const emotionStyleTags = emotionStyles.styles.map((style) => (
+  // const emotionStyles = extractCriticalToChunks(initialProps.html);
+  // // console.log("emotionStyles",emotionStyles.styles.length)
+  const emotionStyleTags = extractCriticalToChunks(initialProps.html).styles.map((style) => (
     <style
       nonce={nonce}
       data-emotion={`${style.key} ${style.ids.join(' ')}`}
