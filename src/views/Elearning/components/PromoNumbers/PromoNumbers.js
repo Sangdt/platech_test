@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
-import React, { memo } from 'react';
-import withHydrationOnDemand from "react-hydration-on-demand";
+import React  from 'react';
+//import withHydrationOnDemand from "react-hydration-on-demand";
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
@@ -183,4 +183,4 @@ const PromoNumbers = ({ pageTitle, shortDescription, IntroductionSections }) => 
   );
 };
 
-export default withHydrationOnDemand({ on: ["visible"] })(memo(PromoNumbers));
+export default PromoNumbers

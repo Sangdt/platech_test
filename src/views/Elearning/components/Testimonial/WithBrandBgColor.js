@@ -1,5 +1,4 @@
-import React, { memo } from 'react';
-import withHydrationOnDemand from "react-hydration-on-demand";
+import React from 'react';
 import Card from '@mui/material/Card';
 import Box from '@mui/material/Box';
 import CardContent from '@mui/material/CardContent';
@@ -129,4 +128,4 @@ const WithBrandBgColor = ({ testimonial }) => {
   );
 };
 
-export default withHydrationOnDemand({ on: ["visible"] })(memo(WithBrandBgColor));
+export default WithBrandBgColor;

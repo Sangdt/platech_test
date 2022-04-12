@@ -1,5 +1,5 @@
-import React, { memo } from 'react';
-import withHydrationOnDemand from "react-hydration-on-demand";
+import React from 'react';
+// import withHydrationOnDemand from "react-hydration-on-demand";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import Box from '@mui/material/Box';
@@ -258,4 +258,5 @@ const sliderOpts = {
   // customTransition: 'all .5',
   // transitionDuration: 500,
 };
-export default withHydrationOnDemand({ on: ["visible"] })(memo(Spaces));
+// export default withHydrationOnDemand({ on: ["visible"] })(memo(Spaces));
+export default Spaces
