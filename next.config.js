@@ -3,7 +3,7 @@
 /* eslint-disable linebreak-style */
 // eslint-disable-next-line no-undef
 const withPlugins = require('next-compose-plugins');
-const withPreact = require('next-plugin-preact')
+// const withPreact = require('next-plugin-preact')
 
 const { checkArrNotEmpty } = require('./src/Helper/checkArrNotEmpty');
 // const getURLforModelApikey = require('./Helper/getURLforModelApikey');
