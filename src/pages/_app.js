@@ -16,7 +16,7 @@ import 'styles/new_slide.css'
 // import 'react-image-lightbox/style.css';
 // import 'aos/dist/aos.css';
 // let clientUA;
-export default function App({ Component, pageProps,UA }) {
+export default function App({ Component, pageProps, UA }) {
   // if (UA) clientUA = UA;
   console.log("App pageProps for UA", UA)
 
@@ -33,7 +33,7 @@ export default function App({ Component, pageProps,UA }) {
       </Head> */}
       <Page>
         <Main {...SeoAndLayoutContent}>
-          <Component {...pageProps}  />
+          <Component {...pageProps} />
         </Main>
       </Page>
     </React.Fragment>

@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
-import React from 'react';
+import React, { memo } from 'react';
+import withHydrationOnDemand from "react-hydration-on-demand";
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
@@ -21,7 +22,7 @@ const Categories = ({ categoryList }) => {
           Danh mục sản phẩm
         </Typography>
       </Box>
-      <Box  style={{textAlign: "center",alignItems:"center"}}  >
+      <Box style={{ textAlign: "center", alignItems: "center" }}  >
         <Grid container spacing={4}>
           <ShowcaseGrid categoryList={categoryList} />
         </Grid>
@@ -30,4 +31,4 @@ const Categories = ({ categoryList }) => {
   );
 };
 
-export default Categories;
+export default withHydrationOnDemand({ on: ["visible"] })(memo(Categories));

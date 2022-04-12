@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { memo } from 'react';
+import withHydrationOnDemand from "react-hydration-on-demand";
 import { useTheme } from '@mui/material/styles';
 import Divider from '@mui/material/Divider';
 import Card from '@mui/material/Card';
@@ -8,7 +9,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import useMediaQuery from '@mui/material/useMediaQuery';
+// import useMediaQuery from '@mui/material/useMediaQuery';
 // import Avatar from '@mui/material/Avatar';
 import Link from 'next/link'
 import { Image as DatoCMSImage } from "react-datocms"
@@ -188,4 +189,4 @@ const VerticalMinimalDesignedBlogCards = ({ relatedBlog }) => {
   );
 };
 
-export default VerticalMinimalDesignedBlogCards;
+export default withHydrationOnDemand({ on: ["visible"] })(memo(VerticalMinimalDesignedBlogCards));
