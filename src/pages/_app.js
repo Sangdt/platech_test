@@ -10,7 +10,7 @@ import Page from '../components/Page';
 // import 'react-lazy-load-image-component/src/effects/blur.css';
 
 import 'styles/globals.css'
-import 'styles/new_slide.css'
+// import 'styles/new_slide.css'
 // import 'slick-carousel/slick/slick.css';
 // import 'slick-carousel/slick/slick-theme.css';
 // import 'react-image-lightbox/style.css';

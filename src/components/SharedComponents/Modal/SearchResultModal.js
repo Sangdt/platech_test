@@ -12,7 +12,8 @@ const SearchResultModal = ({ openModal = false, handleModalClose, modalTitle, ch
     // const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
     return (<Dialog
         // fullScreen
-        
+        scroll='body'
+
         open={openModal}
         onClose={handleModalClose}
         aria-labelledby="responsive-dialog-title"

@@ -50,7 +50,8 @@ const ProductCategory = ({ categoryName, categoryDescription, productInCategory,
       <Container>
         <Box>
           {checkArrNotEmpty(productInCategory) && <>
-            <SearchBar searchData={productInCategory} inputPlaceholder={"Tìm kiếm một sản phẩm nào đó"} />
+            <SearchBar searchData={productInCategory}
+              inputPlaceholder={"Tìm kiếm một sản phẩm nào đó"} />
             <WithCtaButton productInCategory={productInCategory} />
           </>}
           {/* {checkArrNotEmpty(productInCategory) && } */}

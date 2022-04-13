@@ -976,7 +976,7 @@ export async function getProductinfo(preview, productSlug) {
         } = await client.fetch(productInfoQuery, {
             slug: productSlug
         });
-        // console.log("productInfoDetail", productInfoDetail)
+        // console.log("productGallery", productGallery)
         const contactDetailArray = [];
         if (Array.isArray(contactDetail) && contactDetail.length > 0) {
             for (const contact of contactDetail) {
@@ -1011,20 +1011,13 @@ export async function getProductinfo(preview, productSlug) {
         }
         return {
             seoTags,
-            productGallery: checkArrNotEmpty(productGallery) ? productGallery.map(({ asset, Title = null, alt = null }) => ({
-                ...responsiveImgBuilder({ asset: asset, Title: Title, alt: alt },
-                    {
-                        "1024w": 670,
-                        "640w": 500,
-                        "320w": 320,
-                    })
+            productGallery: checkArrNotEmpty(productGallery) ? productGallery.map(({ asset, Title = null, alt = null, _key }) => ({
+                id: _key,
+                ...responsiveImgBuilder({ asset: asset, Title: Title, alt: alt }, [320, 520, 600, 770])
             })) : null,
-            productGallerythumbs: checkArrNotEmpty(productGallery) ? productGallery.map(({ asset }) => ({
-                ...responsiveImgBuilder({ asset: asset }, {
-                    "1024w": 150,
-                    "640w": 80,
-                    "320w": 50,
-                })
+            productGallerythumbs: checkArrNotEmpty(productGallery) ? productGallery.map(({ asset, _key }) => ({
+                id: _key,
+                ...responsiveImgBuilder({ asset: asset },  [250, 360, 450, 550])
             })) : null,
             id: _id,
             productName,

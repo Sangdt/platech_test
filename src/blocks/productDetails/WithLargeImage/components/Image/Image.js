@@ -1,24 +1,26 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
+import { Image } from 'react-datocms'
+// const mock = [
+//   {
+//     title: '',
+//     src: 'https://assets.maccarianagency.com/backgrounds/img54.jpg',
+//   },
+//   {
+//     title: '',
+//     src: 'https://assets.maccarianagency.com/backgrounds/img53.jpg',
+//   },
+//   {
+//     title: '',
+//     src: 'https://assets.maccarianagency.com/backgrounds/img55.jpg',
+//   },
+// ];
 
-const mock = [
-  {
-    title: '',
-    src: 'https://assets.maccarianagency.com/backgrounds/img54.jpg',
-  },
-  {
-    title: '',
-    src: 'https://assets.maccarianagency.com/backgrounds/img53.jpg',
-  },
-  {
-    title: '',
-    src: 'https://assets.maccarianagency.com/backgrounds/img55.jpg',
-  },
-];
-
-const Image = () => {
-  const [current, setCurrent] = useState(mock[0]);
+const ImageSlider = ({ productGallery, productGallerythumbs }) => {
+  // console.log("productGallery, productGallerythumbs", productGallery, productGallerythumbs)
+  const [current, setCurrent] = useState(productGallery[0]);
+  const getItemByID = (id) => productGallery.find(item => item.id === id)
   return (
     <Box>
       {current && (
@@ -35,7 +37,7 @@ const Image = () => {
             },
           }}
         >
-          <img src={current.src} alt={current.title} />
+          <Image data={current.responsiveImage} />
         </Box>
       )}
       <Stack
@@ -44,10 +46,10 @@ const Image = () => {
         alignItems={'center'}
         flexWrap={'wrap'}
       >
-        {mock.map((item, i) => (
+        {productGallerythumbs.map((item, i) => (
           <Box
-            key={i}
-            onClick={() => setCurrent(item)}
+            key={`${i}_${item.id}`}
+            onClick={() => setCurrent(getItemByID(item.id))}
             sx={{
               width: 80,
               height: 'auto',
@@ -60,7 +62,7 @@ const Image = () => {
               },
             }}
           >
-            <img src={item.src} alt={item.title} />
+            <Image data={item.responsiveImage} />
           </Box>
         ))}
       </Stack>
@@ -68,4 +70,4 @@ const Image = () => {
   );
 };
 
-export default Image;
+export default ImageSlider;

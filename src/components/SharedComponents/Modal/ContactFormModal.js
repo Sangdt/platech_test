@@ -16,6 +16,7 @@ const ContactFormModal = ({ openModal = false, handleModalClose, modalTitle, pro
     return (<Dialog
         // fullScreen
         fullWidth
+        scroll='body'
         open={openModal}
         onClose={handleModalClose}
         aria-labelledby="responsive-dialog-title"
