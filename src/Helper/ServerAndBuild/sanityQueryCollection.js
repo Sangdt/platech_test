@@ -47,7 +47,7 @@ _type=="childCategory"=>{
 },
   _type=="product"=>{
   _id,
-  "seoLinks":"/chi-tiet-san-pham/"+slug.current
+  "seoLinks":"/san-pham/"+slug.current
 },
   _type=="service"=>{
   _id,
@@ -383,7 +383,7 @@ _type=="childCategory"=>{
 },
   _type=="product"=>{
   _id,
-  "seoLinks":"/chi-tiet-san-pham/"+slug.current
+  "seoLinks":"/san-pham/"+slug.current
 },
   _type=="service"=>{
   _id,
@@ -478,7 +478,7 @@ _type=="childCategory"=>{
 },
   _type=="product"=>{
   _id,
-  "seoLinks":"/chi-tiet-san-pham/"+slug.current
+  "seoLinks":"/san-pham/"+slug.current
 },
   _type=="service"=>{
   _id,
@@ -512,7 +512,7 @@ _type=="childCategory"=>{
 },
   _type=="product"=>{
   _id,
-  "seoLinks":"/chi-tiet-san-pham/"+slug.current
+  "seoLinks":"/san-pham/"+slug.current
 },
   _type=="service"=>{
   _id,
@@ -559,7 +559,7 @@ _type=="childCategory"=>{
 },
   _type=="product"=>{
   _id,
-  "url":"/chi-tiet-san-pham/"+slug.current
+  "url":"/san-pham/"+slug.current
 },
   _type=="service"=>{
   _id,
@@ -738,7 +738,7 @@ asset->{
 url
 }
 },
-"link":"/chi-tiet-san-pham/"+slug.current
+"link":"/san-pham/"+slug.current
 },
 _type=="service"=>{
 "id":_id,
@@ -823,7 +823,7 @@ asset->{
 url
 }
 },
-"link":"/chi-tiet-san-pham/"+slug.current
+"link":"/san-pham/"+slug.current
 },
 _type=="service"=>{
 _id,

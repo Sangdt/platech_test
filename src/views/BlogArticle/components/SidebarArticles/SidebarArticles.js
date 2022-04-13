@@ -81,7 +81,7 @@ const SidebarArticles = ({ contentClassName, tocSelector }) => {
 
   };
   const UpdateWhenRouteChange = (url) => {
-    if (url.includes('/blog/') || url.includes('/chi-tiet-san-pham/') || url.includes('/dich-vu/')) {
+    if (url.includes('/blog/') || url.includes('/san-pham/') || url.includes('/dich-vu/')) {
       tocbot.refresh(tocbotInitObj);
     } else {
       tocbot.destroy();

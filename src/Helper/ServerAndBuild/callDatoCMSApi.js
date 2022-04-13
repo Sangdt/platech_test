@@ -178,7 +178,7 @@ export async function getFullPagePath(preview = false) {
         products.forEach(element => {
             if (element) {
                 allURLs.push({
-                    link: `/chi-tiet-san-pham/${element.seoLink ?? element.seoLinks}`,
+                    link: `/san-pham/${element.seoLink ?? element.seoLinks}`,
                     lastmod: element.updatedAt
                 });
             }

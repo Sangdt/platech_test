@@ -13,7 +13,7 @@ import Link from "next/link";
 //                 {children}
 //             </Link>);
 //         case "product":
-//             return (<Link href={`/chi-tiet-san-pham/${links}`} {...getPrefetch()}>
+//             return (<Link href={`/san-pham/${links}`} {...getPrefetch()}>
 //                 {children}
 //             </Link>);
 //         case "category_page":
@@ -48,7 +48,7 @@ export function getURLForModelApiKey({ _modelApiKey, links }) {
         case "blog":
             return `/blog/${links}`
         case "product":
-            return `/chi-tiet-san-pham/${links}`;
+            return `/san-pham/${links}`;
         case "category_page":
             return `/danh-muc-san-pham/${links}`;
         case "category_list_page":

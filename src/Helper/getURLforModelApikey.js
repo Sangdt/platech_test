@@ -3,7 +3,7 @@ module.exports= ({ _modelApiKey, links }) => {
         case "blog":
             return `/blog/${links}`
         case "product":
-            return `/chi-tiet-san-pham/${links}`
+            return `/san-pham/${links}`
         case "category_page":
             return `/danh-muc-san-pham/${links}`
         case "category_list_page":

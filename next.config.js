@@ -108,8 +108,8 @@ const nextConfig = {
         destination: '/api/seo/feed/danh-muc-san-pham/:slug', // Matched parameters can be used in the destination
       },
       {
-        source: '/chi-tiet-san-pham/:slug/feed',
-        destination: '/api/seo/feed/chi-tiet-san-pham/:slug', // Matched parameters can be used in the destination
+        source: '/san-pham/:slug/feed',
+        destination: '/api/seo/feed/san-pham/:slug', // Matched parameters can be used in the destination
       },
     ];
   },

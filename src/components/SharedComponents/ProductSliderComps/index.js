@@ -21,7 +21,7 @@ import "react-multi-carousel/lib/styles.css";
 
 const SingleItem = ({ index, productName, seoLinks, headerImage }) => {
     // const isAmp = useAmp()
-    const LinkWrapper = ({ children }) => (seoLinks ? <Link href={`/chi-tiet-san-pham/${seoLinks}`} prefetch={false}>
+    const LinkWrapper = ({ children }) => (seoLinks ? <Link href={`/san-pham/${seoLinks}`} prefetch={false}>
         <a className="full-link">{children}</a>
     </Link> : children);
 
@@ -56,7 +56,7 @@ const SingleItem = ({ index, productName, seoLinks, headerImage }) => {
     //                 <Searchicons />
     //             </span>
     //         </div> */}
-    //         {seoLinks && <Link href="/chi-tiet-san-pham/[productSlug]" as={`/chi-tiet-san-pham/${seoLinks}`}>
+    //         {seoLinks && <Link href="/san-pham/[productSlug]" as={`/san-pham/${seoLinks}`}>
     //             <a className="full-link"></a>
     //         </Link>}
 

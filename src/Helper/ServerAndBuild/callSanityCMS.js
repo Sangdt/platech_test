@@ -170,7 +170,7 @@ function parseCMSSchema(JsonSchema) {
                     url = "/blog/" + seoLinks.current
                     break;
                 default:
-                    url = "/chi-tiet-san-pham/" + slug.current
+                    url = "/san-pham/" + slug.current
                     break;
             }
         }
@@ -219,7 +219,7 @@ function parseCMSSchema(JsonSchema) {
                     break;
                 default:
                     // console.log("seoLinks,slug", seoLinks, slug)
-                    url = "/chi-tiet-san-pham/" + slug.current
+                    url = "/san-pham/" + slug.current
                     break;
             }
         }

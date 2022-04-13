@@ -211,7 +211,7 @@ const Spaces = ({ productList }) => {
                   </CardContent>
                   <Box flexGrow={1} />
                   {item?.seoLinks && <CardActions sx={{ justifyContent: 'flex-end' }}>
-                    <Link href={"/chi-tiet-san-pham/" + item?.seoLinks}>
+                    <Link href={"/san-pham/" + item?.seoLinks}>
                       <Button
                         component={'a'}
                         variant="contained" size="medium">

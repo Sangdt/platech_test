@@ -2101,7 +2101,7 @@ const datoCMSSinglePageFeed = (pageName, hasSlug = false) => {
       }
     }`;
 
-    case "chi-tiet-san-pham":
+    case "san-pham":
       return `query AllPagePathQuery($slug: String) {
         pageInfo: allProducts(filter: {seoLinks: {eq: $slug}}) {
           _modelApiKey
@@ -2291,7 +2291,7 @@ const datoCMSGetPageRedirectInfo = (pageName, hasSlug = false) => {
         }
     }`;
 
-    case "chi-tiet-san-pham":
+    case "san-pham":
       return `query AllPagePathQuery($slug: String) {
         pageInfo: allProducts(filter: {seoLinks: {eq: $slug}}) {
           _modelApiKey
