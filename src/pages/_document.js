@@ -127,7 +127,7 @@ MyDocument.getInitialProps = async (ctx) => {
   if (res != null) {
     res.setHeader('Content-Security-Policy', getCsp(nonce))
   }
-  const initialProps = await Document.getInitialProps(ctx);
+  const initialProps = await ctx.defaultGetInitialProps(ctx, { nonce })
   // if (typeof ctx?.res?.setHeader !== "undefined") {
   //   UA = ctx?.req.headers['user-agent']
   //   // console.log("document ctx", ctx?.req.headers['user-agent'] );
