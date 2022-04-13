@@ -56,11 +56,11 @@ export default class MyDocument extends Document {
 MyDocument.getInitialProps = async (ctx) => {
   const nonce = nanoid(10);
 
-const emotionCache = createCache({
-  key: 'css',
-  prepend: true,
-  nonce: nonce,
-});
+  const emotionCache = createCache({
+    key: 'css',
+    prepend: true,
+    nonce: nonce,
+  });
   // console.log("document ctx",ctx?.res?.get('User-Agent'));
   emotionCache.compat = true;
   let UA;
@@ -116,9 +116,17 @@ const emotionCache = createCache({
       ),
     });
   const res = ctx?.res
+  console.log("res", res);
+  if (typeof ctx?.res?.setHeader !== "undefined") {
+    ctx.res.setHeader('Content-Security-Policy', getCsp(nonce))
+  } else if (typeof ctx?.res?.writeHead !== "undefined") {
+    ctx.res.writeHead(200,
+      { 'Content-Security-Policy': getCsp(nonce) })
+  }
+
   if (res != null) {
     res.setHeader('Content-Security-Policy', getCsp(nonce))
-  }
+  }F
   const initialProps = await Document.getInitialProps(ctx);
   // if (typeof ctx?.res?.setHeader !== "undefined") {
   //   UA = ctx?.req.headers['user-agent']
