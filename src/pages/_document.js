@@ -14,7 +14,13 @@ import {
 } from 'Helper/utils/gtag';
 let prod = process.env.NODE_ENV === "production";
 let referrer = "strict-origin";
+const nonce = nanoid(10);
 
+  const emotionCache = createCache({
+    key: 'css',
+    prepend: true,
+    nonce: nonce,
+  });
 function getCsp(nonce) {
   let csp = ``;
   csp += `base-uri 'self';`;
@@ -39,6 +45,7 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head nonce={this.props.nonce} >
+          {!this.props.CspSettled && <meta property="http-equiv" content={getCsp(this.props.nonce)} />}
           <meta property="csp-nonce" content={this.props.nonce} />
           {this.props.emotionStyleTags}
         </Head>
@@ -54,13 +61,7 @@ export default class MyDocument extends Document {
 // `getInitialProps` belongs to `_document` (instead of `_app`),
 // it's compatible with static-site generation (SSG).
 MyDocument.getInitialProps = async (ctx) => {
-  const nonce = nanoid(10);
-
-  const emotionCache = createCache({
-    key: 'css',
-    prepend: true,
-    nonce: nonce,
-  });
+  
   // console.log("document ctx",ctx?.res?.get('User-Agent'));
   emotionCache.compat = true;
   let UA;
@@ -94,6 +95,11 @@ MyDocument.getInitialProps = async (ctx) => {
 
   // Render app and page and get the context of the page with collected side effects.
   const originalRenderPage = ctx.renderPage;
+  const initialProps = await ctx.defaultGetInitialProps(ctx, { nonce })
+  if(typeof ctx.res.setHeader !== "undefined"){
+    ctx.res.setHeader('Content-Security-Policy', getCsp(nonce))
+    CspSettled = true;
+  }
 
   const { extractCriticalToChunks } = createEmotionServer(emotionCache);
   // console.log("UA", UA)
@@ -118,16 +124,18 @@ MyDocument.getInitialProps = async (ctx) => {
   const res = ctx?.res
   console.log("res", res);
   if (typeof ctx?.res?.setHeader !== "undefined") {
-    ctx.res.setHeader('Content-Security-Policy', getCsp(nonce))
+    ctx.res.setHeader('Content-Security-Policy', getCsp(nonce));
+    CspSettled = true;
   } else if (typeof ctx?.res?.writeHead !== "undefined") {
     ctx.res.writeHead(200,
-      { 'Content-Security-Policy': getCsp(nonce) })
+      { 'Content-Security-Policy': getCsp(nonce) });
+    CspSettled = true;
+
   }
 
   if (res != null) {
     res.setHeader('Content-Security-Policy', getCsp(nonce))
   }
-  const initialProps = await ctx.defaultGetInitialProps(ctx, { nonce })
   // if (typeof ctx?.res?.setHeader !== "undefined") {
   //   UA = ctx?.req.headers['user-agent']
   //   // console.log("document ctx", ctx?.req.headers['user-agent'] );
