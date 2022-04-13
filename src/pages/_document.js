@@ -32,13 +32,7 @@ function getCsp(nonce) {
   csp += `worker-src  'self' blob:`
   return csp;
 }
-const nonce = nanoid(10);
 
-const emotionCache = createCache({
-  key: 'css',
-  prepend: true,
-  nonce: nonce,
-});
 
 export default class MyDocument extends Document {
   render() {
@@ -60,6 +54,13 @@ export default class MyDocument extends Document {
 // `getInitialProps` belongs to `_document` (instead of `_app`),
 // it's compatible with static-site generation (SSG).
 MyDocument.getInitialProps = async (ctx) => {
+  const nonce = nanoid(10);
+
+const emotionCache = createCache({
+  key: 'css',
+  prepend: true,
+  nonce: nonce,
+});
   // console.log("document ctx",ctx?.res?.get('User-Agent'));
   emotionCache.compat = true;
   let UA;
@@ -114,20 +115,23 @@ MyDocument.getInitialProps = async (ctx) => {
         </CacheProvider>
       ),
     });
-
-  const initialProps = await Document.getInitialProps(ctx);
-  if (typeof ctx?.res?.setHeader !== "undefined") {
-    UA = ctx?.req.headers['user-agent']
-    // console.log("document ctx", ctx?.req.headers['user-agent'] );
-    ctx.res.setHeader('Content-Security-Policy', getCsp(nonce));
-    CspSettled = true;
-  } else if (typeof ctx?.res?.writeHead !== "undefined") {
-    UA = ctx?.req.headers['user-agent']
-    ctx.res.writeHead(200,
-      { 'Content-Security-Policy': getCsp(nonce) })
-    CspSettled = true;
-
+  const res = ctx?.res
+  if (res != null) {
+    res.setHeader('Content-Security-Policy', getCsp(nonce))
   }
+  const initialProps = await Document.getInitialProps(ctx);
+  // if (typeof ctx?.res?.setHeader !== "undefined") {
+  //   UA = ctx?.req.headers['user-agent']
+  //   // console.log("document ctx", ctx?.req.headers['user-agent'] );
+  //   ctx.res.setHeader('Content-Security-Policy', getCsp(nonce));
+  //   CspSettled = true;
+  // } else if (typeof ctx?.res?.writeHead !== "undefined") {
+  //   UA = ctx?.req.headers['user-agent']
+  //   ctx.res.writeHead(200,
+  //     { 'Content-Security-Policy': getCsp(nonce) })
+  //   CspSettled = true;
+
+  // }
   // const emotionStyles = extractCriticalToChunks(initialProps.html);
   // // console.log("emotionStyles",emotionStyles.styles.length)
   const emotionStyleTags = extractCriticalToChunks(initialProps.html).styles.map((style) => (
