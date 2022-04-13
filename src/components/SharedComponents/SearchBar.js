@@ -55,6 +55,11 @@ const SearchBar = ({ inputPlaceholder = 'Search an article', searchData }) => {
     const [openSearchResultModal, setOpenSearchResultModal] = useState(false);
     const [resultCount, setResultCount] = useState(0);
     const [searchVal, setSearchVal] = useState('');
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter' ) {
+            setOpenSearchResultModal(true)
+        }
+    }
     const filterProduct = (searchValue) => {
         setSearchVal(searchValue);
         if (searchValue === "") {
@@ -95,6 +100,7 @@ const SearchBar = ({ inputPlaceholder = 'Search an article', searchData }) => {
         <Box display="flex" alignItems={'center'}>
             <Box width={1} marginRight={1}>
                 <Input
+                    onKeyDown={handleKeyDown}
                     value={searchVal}
                     onChange={e => filterProduct(e.target.value)}
                     sx={{

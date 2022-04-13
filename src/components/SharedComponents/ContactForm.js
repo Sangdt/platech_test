@@ -218,7 +218,7 @@ const SubmitInfoForm = ({ title, portalState, blocking, setBlocking, onSuccessSu
                     // name="Email"
                     {...register("Email", { required: true, pattern: /^\S+@\S+$/i })} />
             </div>
-            {productName && <div className="w-full px-3 sm:w-1/2  ">
+            {productName && <div className="w-full ">
                 <label className={`"block uppercase tracking-wide ${textWhite && 'text-white'} font-bold mb-1`}>Sản phẩm bạn chọn </label>
                 <input
                     disabled value={productName} type="text"

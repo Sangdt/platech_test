@@ -248,11 +248,9 @@ function parseCMSCustomScripts(scriptsInfo) {
  * 
  * @param {*} param0 
  * @param {Object} imgWH It should go sth like this
- *   {
- *       "1024w": 1024,
- *      "640w": 640,
- *       "320w": 320,
- *  }
+ *   [
+"640w", "750w", "828w", "1080w", "1200w", "1920w", "2048w", "3840w"
+ *  ]
  */
 function responsiveImgBuilder({ asset, Title = null, alt = null }, imgW = null) {
     let imageSize = ImageWidthSizeNum;
@@ -912,7 +910,7 @@ export async function getAllCategoryPath(preview = false) {
 export async function getCategoryInfo(preview = false, categorySlug) {
     try {
         let {
-            productInCategory, categoryDescription, categoryName, seoTags
+            productInCategory, categoryDescription, categoryName, seoTags, slug
         } = await client.fetch(categoryInfoQuery, {
             slug: categorySlug
         });
@@ -933,6 +931,7 @@ export async function getCategoryInfo(preview = false, categorySlug) {
         // console.log("productInCategory",productInCategory)
         return {
             seoTag: seoTags,
+            seoLinks: slug?.current ?? "/",
             categoryName,
             schema: checkArrNotEmpty(seoTags?.schema) ? seoTags.schema.filter(item => item)
                 .map(schemaInfo => parseCMSSchema(schemaInfo)) : null,
@@ -945,11 +944,12 @@ export async function getCategoryInfo(preview = false, categorySlug) {
             }) : null,
             productInCategory: checkArrNotEmpty(productInCategory) ? productInCategory
                 .map(({ _id, productName, slug, headerImage }) => ({
+                    searchValue: productName,
                     productName,
                     seoLinks: slug?.current ?? "",
                     id: _id,
                     headerImage: headerImage && {
-                        ...responsiveImgBuilder(headerImage)
+                        ...responsiveImgBuilder(headerImage, ["320", "520", "640"])
                     }
                 })) : null,
         }

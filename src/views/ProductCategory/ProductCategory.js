@@ -6,7 +6,7 @@ import { useTheme } from '@mui/material/styles';
 import Container from 'components/Container';
 import {
   // Breadcrumb,
-  Newsletter
+  // Newsletter
   // , Result
 } from '../BlogSearch/components';
 import ShowcaseGrid from '../../blocks/categoryShowcases/ShowcaseGrid';

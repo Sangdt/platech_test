@@ -4,27 +4,56 @@ import { useTheme } from '@mui/material/styles';
 
 // import Main from 'layouts/Main';
 import Container from 'components/Container';
-import {
-  Breadcrumb
-  , Newsletter
-  // , Result
-} from '../ProductCategory/components';
-import WithCtaButton from '../../blocks/productGrids/MinimallyDesigned/MinimallyDesigned';
-import  SearchBar  from '../ProductCategory/components/SearchBar';
+// import {
+//   Breadcrumb
+//   // , Newsletter
+//   // , Result
+// } from '../ProductCategory/components';
+import Breadcrumb from 'components/SharedComponents/Breadcrumb';
 
-const ProductCategory = () => {
+import WithCtaButton from '../../blocks/productGrids/MinimallyDesigned/MinimallyDesigned';
+import SearchBar from 'components/SharedComponents/SearchBar';
+import { checkArrNotEmpty } from 'Helper/checkArrNotEmpty';
+
+const ProductCategory = ({ categoryName, categoryDescription, productInCategory, seoLinks, }) => {
   const theme = useTheme();
   return (
     <>
       <Box bgcolor={'alternate.main'}>
         <Container paddingY={2}>
-          <Breadcrumb />
+          <Breadcrumb routeArray={[
+            {
+              href: '/',
+              title: 'Home',
+              isActive: false,
+            },
+            {
+              href: '/danh-muc-san-pham/',
+              title: 'Danh mục sản phẩm',
+              isActive: false,
+            },
+            {
+              href: '/danh-muc-san-pham/' + seoLinks,
+              title: categoryName,
+              isActive: true,
+            },
+          ]} />
+          <div className="box-top">
+            <div className="wrap-main">
+              <div className="box-text">
+                {categoryName && <h1 className="tt-1">{categoryName}</h1>}
+              </div>
+            </div>
+          </div>
         </Container>
       </Box>
       <Container>
         <Box>
-          <SearchBar inputPlaceholder='Search a product in this category'/>
-          <WithCtaButton />
+          {checkArrNotEmpty(productInCategory) && <>
+            <SearchBar searchData={productInCategory} inputPlaceholder={"Tìm kiếm một sản phẩm nào đó"} />
+            <WithCtaButton productInCategory={productInCategory} />
+          </>}
+          {/* {checkArrNotEmpty(productInCategory) && } */}
         </Box>
         {/* <Result /> */}
       </Container>
@@ -58,7 +87,19 @@ const ProductCategory = () => {
           ></path>
         </Box>
         <Container>
-          <Newsletter />
+          <div className="box-top">
+            <div className="wrap-main">
+              <div className="box-text">
+                {checkArrNotEmpty(categoryDescription) ? <div className="text-center">
+                  {categoryDescription.map(descriptionContent =>
+                    <div key={descriptionContent.id} dangerouslySetInnerHTML={{ __html: descriptionContent }} />)}
+                </div> :
+                  !checkArrNotEmpty(categoryDescription) &&
+                  <div className="text-center" dangerouslySetInnerHTML={{ __html: categoryDescription }} />
+                }
+              </div>
+            </div>
+          </div>
         </Container>
       </Box>
     </>

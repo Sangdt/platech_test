@@ -12,6 +12,7 @@ const SearchResultModal = ({ openModal = false, handleModalClose, modalTitle, ch
     // const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
     return (<Dialog
         // fullScreen
+        
         open={openModal}
         onClose={handleModalClose}
         aria-labelledby="responsive-dialog-title"
@@ -23,7 +24,7 @@ const SearchResultModal = ({ openModal = false, handleModalClose, modalTitle, ch
             {children}
         </DialogContent>
         <DialogActions>
-            <Button onClick={handleModalClose} autoFocus color='warning' variant="contained">
+            <Button onClick={handleModalClose} color='warning' variant="contained">
                 Tắt Cửa Sổ Này
             </Button>
         </DialogActions>
