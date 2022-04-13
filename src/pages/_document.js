@@ -64,16 +64,8 @@ MyDocument.getInitialProps = async (ctx) => {
   emotionCache.compat = true;
   let UA;
   // const styles = [...flush({ nonce })]
+  let CspSettled = false;
 
-  if (typeof ctx?.res?.setHeader !== "undefined") {
-    UA = ctx?.req.headers['user-agent']
-    // console.log("document ctx", ctx?.req.headers['user-agent'] );
-    ctx.res.setHeader('Content-Security-Policy', getCsp(nonce))
-  } else if (typeof ctx?.res?.writeHead !== "undefined") {
-    UA = ctx?.req.headers['user-agent']
-    ctx.res.writeHead(200,
-      { 'Content-Security-Policy': getCsp(nonce) })
-  }
   // ctx.res.setHeader('Content-Security-Policy', getCsp(nonce))
   // ctx.res.writeHead(200,
   //   { 'Content-Security-Policy': getCsp(nonce) })
@@ -124,6 +116,18 @@ MyDocument.getInitialProps = async (ctx) => {
     });
 
   const initialProps = await Document.getInitialProps(ctx);
+  if (typeof ctx?.res?.setHeader !== "undefined") {
+    UA = ctx?.req.headers['user-agent']
+    // console.log("document ctx", ctx?.req.headers['user-agent'] );
+    ctx.res.setHeader('Content-Security-Policy', getCsp(nonce));
+    CspSettled = true;
+  } else if (typeof ctx?.res?.writeHead !== "undefined") {
+    UA = ctx?.req.headers['user-agent']
+    ctx.res.writeHead(200,
+      { 'Content-Security-Policy': getCsp(nonce) })
+    CspSettled = true;
+
+  }
   // const emotionStyles = extractCriticalToChunks(initialProps.html);
   // // console.log("emotionStyles",emotionStyles.styles.length)
   const emotionStyleTags = extractCriticalToChunks(initialProps.html).styles.map((style) => (
@@ -145,6 +149,6 @@ MyDocument.getInitialProps = async (ctx) => {
       ...React.Children.toArray(initialProps.styles),
       // ...emotionStyleTags,
     ],
-    nonce
+    nonce, CspSettled
   };
 };
