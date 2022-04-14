@@ -47,13 +47,13 @@ const nextConfig = {
         }
       ],
     });
-    config.plugins.push(
-      new webpack.DefinePlugin({
-        'process.env': {
-          BUILD_ID: JSON.stringify(buildId),
-        },
-      }),
-    );
+    // config.plugins.push(
+    //   new webpack.DefinePlugin({
+    //     'process.env': {
+    //       BUILD_ID: JSON.stringify(buildId),
+    //     },
+    //   }),
+    // );
     config.module.rules.push(
       {
         // val-loader for page layout

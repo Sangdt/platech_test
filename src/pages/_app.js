@@ -23,13 +23,13 @@ const clientSideEmotionCache = createEmotionCache();
 
 export default function App(props) {
   // if (UA) clientUA = UA;
-  const { Component, emotionCache = clientSideEmotionCache, pageProps, nonce } = props;
+  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
 
   console.log("test",pageProps.nonce)
   return (
     <CacheProvider value={emotionCache} >
-      <DefaultHeadTags {...SeoAndLayoutContent?.seo} nonce={nonce} />
+      <DefaultHeadTags {...SeoAndLayoutContent?.seo} />
       {/* <Head>
         <meta
           name="viewport"

@@ -10,13 +10,13 @@ import Script from 'next/script'
 // import { GA_TAGMANAGER_ID, GA_TRACKING_ID } from '@/Helper/utils/gtag';
 // import navBarToggle from '!raw-loader!@/SharedComponents/AMP/navBarToggle'
 
-const DefaultHeadTags = ({ globalSeoConfig, nonce }) => {
+const DefaultHeadTags = ({ globalSeoConfig }) => {
     const router = useRouter();
     // const isAmp = useAmp();
     // console.log("globalSeo", globalSeoConfig)
     return (<>
         <Head>
-            <meta property="csp-nonce" content={nonce} />
+            {/* <meta property="csp-nonce" content={nonce} /> */}
             <meta charSet="UTF-8" />
             {/* <link
                 href="https://fonts.googleapis.com/css2?family=Nunito&display=swap"
