@@ -26,7 +26,7 @@ export default function App(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps, nonce } = props;
 
 
-  // console.log("SeoAndLayoutContent",SeoAndLayoutContent)
+  console.log("test",pageProps.nonce)
   return (
     <CacheProvider value={emotionCache} >
       <DefaultHeadTags {...SeoAndLayoutContent?.seo} nonce={nonce} />
