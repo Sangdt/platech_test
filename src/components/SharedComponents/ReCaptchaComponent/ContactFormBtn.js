@@ -45,7 +45,7 @@ const ContactFormBtn = ({ onVerifyCaptcha, nonceValue, isSubmitting, isValid }) 
             async: false, // optional, default to false,
             defer: true, // optional, default to false
             appendTo: 'body', // optional, default to "head", can be "head" or "body",
-            // nonce: nonceValue  // optional, default undefined
+            nonce: nonceValue  // optional, default undefined
         }}
         reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
     >
