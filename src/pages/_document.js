@@ -61,7 +61,7 @@ MyDocument.getInitialProps = async (ctx) => {
   const nonce = nanoid(10);
 
   // console.log("document ctx",ctx?.res?.get('User-Agent'));
-  emotionCache.compat = true;
+  // emotionCache.compat = true;
   let UA;
   // const styles = [...flush({ nonce })]
   let CspSettled = false;

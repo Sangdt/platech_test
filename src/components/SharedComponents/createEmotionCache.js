@@ -6,5 +6,5 @@ export default function createEmotionCache(nonceServerValue = '') {
     let nonceValue;
     if (typeof window !== "undefined") nonceValue = document.head.querySelector("[property~=csp-nonce][content]").content;
     else if (nonceServerValue !== "") nonceValue = nonceServerValue
-    return createCache({ key: 'css', prepend: true, nonce: nonceValue });
+    return createCache({ key: 'css', nonce: nonceValue });
 }
