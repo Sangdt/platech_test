@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // import Head from 'next/head';
+import { CacheProvider } from '@emotion/react';
+
 import Main from 'layouts/Main';
 import * as SeoAndLayoutContent from "Helper/pageLayoutCMSContent";
 import DefaultHeadTags from 'layouts/DefaultHeadTags';
+import createEmotionCache from 'components/SharedComponents/createEmotionCache';
 
 import Page from '../components/Page';
 
@@ -16,13 +19,16 @@ import 'styles/globals.css'
 // import 'react-image-lightbox/style.css';
 // import 'aos/dist/aos.css';
 // let clientUA;
-export default function App({ Component, pageProps, UA }) {
+const clientSideEmotionCache = createEmotionCache();
+
+export default function App(props) {
   // if (UA) clientUA = UA;
-  console.log("App pageProps for UA", UA)
+  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+
 
   // console.log("SeoAndLayoutContent",SeoAndLayoutContent)
   return (
-    <React.Fragment>
+    <CacheProvider value={emotionCache}>
       <DefaultHeadTags {...SeoAndLayoutContent?.seo} />
       {/* <Head>
         <meta
@@ -36,7 +42,7 @@ export default function App({ Component, pageProps, UA }) {
           <Component {...pageProps} />
         </Main>
       </Page>
-    </React.Fragment>
+    </CacheProvider>
   );
 }
 
