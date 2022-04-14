@@ -43,7 +43,6 @@ export default class MyDocument extends Document {
       <Html lang="en">
         <Head nonce={this.props.nonce} >
           {!this.props.CspSettled && <meta property="http-equiv" content={getCsp(this.props.nonce)} />}
-          <meta property="csp-nonce" content={this.props.nonce} />
           {this.props.emotionStyleTags}
         </Head>
         <body>
@@ -84,7 +83,7 @@ MyDocument.getInitialProps = async (ctx) => {
     originalRenderPage({
       enhanceApp: (App) =>
         function EnhanceApp(props) {
-          return <App emotionCache={emotionCache(nonce)} {...props} />;
+          return <App emotionCache={emotionCache(nonce)} {...props} nonce={nonce} />;
         },
     });
 
