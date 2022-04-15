@@ -102,7 +102,7 @@ MyDocument.getInitialProps = async (ctx) => {
     />
   ));
   // console.log("initialProps.styles", initialProps.styles)
-  ctx.res.setHeader('Content-Security-Policy', getCsp(nonce))
+  if(ctx.res)ctx.res.setHeader('Content-Security-Policy', getCsp(nonce))
 
   return {
     ...initialProps,
