@@ -42,13 +42,13 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head nonce={this.props.nonce} >
-          <meta httpEquiv="Content-Security-Policy" content={getCsp(this.props.nonce)} />
+          {/* <meta httpEquiv="Content-Security-Policy" content={getCsp(this.props.nonce)} /> */}
           <meta property="csp-nonce" content={this.props.nonce} />
           {this.props.emotionStyleTags}
         </Head>
         <body>
           <Main />
-          <NextScript/>
+          <NextScript nonce={this.props.nonce} />
         </body>
       </Html>
     );
@@ -101,7 +101,8 @@ MyDocument.getInitialProps = async (ctx) => {
       dangerouslySetInnerHTML={{ __html: style.css }}
     />
   ));
-  console.log("initialProps.styles",initialProps.styles)
+  // console.log("initialProps.styles", initialProps.styles)
+  ctx.res.setHeader('Content-Security-Policy', getCsp(nonce))
 
   return {
     ...initialProps,
