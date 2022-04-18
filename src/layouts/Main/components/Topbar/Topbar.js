@@ -11,7 +11,7 @@ import { checkArrNotEmpty } from 'Helper/checkArrNotEmpty';
 import AppBar from '@mui/material/AppBar';
 import Container from 'components/Container';
 
-const Topbar = ({ onSidebarOpen, bgcolor, pages, colorInvert = false, menuItems, pageLogo }) => {
+const Topbar = ({ bgcolor , colorInvert = false, menuItems, pageLogo }) => {
   // console.log("menuItems", menuItems)
   // console.log("colorInvert",colorInvert)
 

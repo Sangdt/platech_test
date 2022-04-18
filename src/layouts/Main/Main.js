@@ -62,7 +62,7 @@ const Main = ({ children, colorInvert = false, bgcolor = 'transparent', salesInf
       </Box>
       {isMd && <Topbar
         bgcolor={bgcolor}
-        onSidebarOpen={handleSidebarOpen}
+        // onSidebarOpen={handleSidebarOpen}
         {...pageHeader}
         // pages={pages}
         colorInvert={colorInvert}
