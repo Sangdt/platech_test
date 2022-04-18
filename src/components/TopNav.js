@@ -6,62 +6,51 @@ import Typography from '@mui/material/Typography';
 
 import ThemeModeToggler from 'components/ThemeModeToggler';
 
-const TopNav = ({ colorInvert = false }) => {
+const TopNav = ({ colorInvert = false, topPageHeader }) => {
+  // console.log("topPageHeader", topPageHeader)
   return (
     <Box display={'flex'} justifyContent={'flex-end'} alignItems={'center'}>
-      <Box marginRight={{ xs: 1, sm: 2 }}>
-        <Link
-          underline="none"
-          component="a"
-          href="/demos"
-          color={colorInvert ? 'common.white' : 'text.primary'}
-          sx={{ display: 'flex', alignItems: 'center' }}
-        >
-          Demos
-          <Box
-            padding={0.5}
-            display={'inline-flex'}
-            borderRadius={1}
-            bgcolor={'primary.main'}
-            marginLeft={1}
-          >
-            <Typography
-              variant={'caption'}
-              sx={{ color: 'common.white', lineHeight: 1 }}
-            >
-              new
-            </Typography>
-          </Box>
-        </Link>
-      </Box>
-      <Box marginRight={{ xs: 1, sm: 2 }}>
-        <Link
-          underline="none"
-          component="a"
-          href="/blocks"
-          color={colorInvert ? 'common.white' : 'text.primary'}
-          sx={{ display: 'flex', alignItems: 'center' }}
-        >
-          Components
-        </Link>
-      </Box>
-      <Box marginRight={{ xs: 1, sm: 2 }}>
-        <Link
-          underline="none"
-          component="a"
-          href="/docs/introduction"
-          color={colorInvert ? 'common.white' : 'text.primary'}
-        >
-          Docs
-        </Link>
-      </Box>
+      {topPageHeader && <>
+        {topPageHeader.telephone_numner && <CallNow {...topPageHeader.telephone_numner} />}
+        {topPageHeader.top_header_item && <TopBarLink {...topPageHeader.top_header_item} colorInvert={colorInvert} />}
+      </>}
       <Box>
         <ThemeModeToggler />
       </Box>
     </Box>
   );
 };
+const CallNow = ({ phoneNumber }) => (<Box marginRight={{ xs: 1, sm: 2 }}>
+  <a href={`tel:${phoneNumber}`}>
+    Hotline:
+    <Box
+      padding={0.5}
+      display={'inline-flex'}
+      borderRadius={1}
+      bgcolor={'primary.main'}
+      marginLeft={1}
+    >
+      <Typography
+        variant={'caption'}
+        sx={{ color: 'common.white', lineHeight: 1 }}
+      >
+        +{phoneNumber}
+      </Typography>
+    </Box>
+  </a>
+</Box>);
 
+const TopBarLink = ({ colorInvert, linkTo, itemName }) => (<Box marginRight={{ xs: 1, sm: 2 }}>
+  <Link
+    underline="none"
+    component="a"
+    href={linkTo ?? "/"}
+    color={colorInvert ? 'common.white' : 'text.primary'}
+    sx={{ display: 'flex', alignItems: 'center' }}
+  >
+    {itemName}
+  </Link>
+</Box>)
 TopNav.propTypes = {
   colorInvert: PropTypes.bool,
 };

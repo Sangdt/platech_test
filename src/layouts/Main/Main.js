@@ -4,7 +4,7 @@ import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
-import AppBar from '@mui/material/AppBar';
+// import AppBar from '@mui/material/AppBar';
 // import useScrollTrigger from '@mui/material/useScrollTrigger';
 import dynamic from 'next/dynamic';
 
@@ -12,16 +12,17 @@ import Container from 'components/Container';
 import TopNav from 'components/TopNav';
 
 import {
-  Topbar
-  , Footer
+  // Topbar
+  Footer
 } from './components';
 
 // import pages from '../navigation';
 
 const Sidebar = dynamic(() => import(  /* webpackChunkName: "Sidebar" */'./components/Sidebar/Sidebar'));
+const Topbar = dynamic(() => import(  /* webpackChunkName: "Topbar" */'./components/Topbar/Topbar'));
 
-const Main = ({ children, colorInvert = false, bgcolor = 'transparent', salesInfo = false, pageHeader, footer, showSaleInfo, setShowSaleInfo,UA }) => {
-  // console.log("footer",UA)
+const Main = ({ children, colorInvert = false, bgcolor = 'transparent', salesInfo = false, pageHeader, footer, showSaleInfo, setShowSaleInfo, UA }) => {
+  // console.log("pageHeader", pageHeader)
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
@@ -50,10 +51,10 @@ const Main = ({ children, colorInvert = false, bgcolor = 'transparent', salesInf
         position={'relative'}
         zIndex={theme.zIndex.appBar}>
         <Container paddingTop={'8px !important'} paddingBottom={'0 !important'}>
-          <TopNav colorInvert={colorInvert} />
+          <TopNav colorInvert={colorInvert} topPageHeader={pageHeader.topPageHeader} />
         </Container>
       </Box>
-      <AppBar
+      {/* <AppBar
         position={'relative'}
         sx={{
           zIndex: 100,
@@ -62,15 +63,16 @@ const Main = ({ children, colorInvert = false, bgcolor = 'transparent', salesInf
         }}
         elevation={0}
       >
-        <Container paddingY={1}>
-          <Topbar
-            onSidebarOpen={handleSidebarOpen}
-            {...pageHeader}
-            // pages={pages}
-            colorInvert={colorInvert}
-          />
-        </Container>
-      </AppBar>
+        <Container paddingY={1}> */}
+      {isMd && <Topbar
+        bgcolor={bgcolor}
+        onSidebarOpen={handleSidebarOpen}
+        {...pageHeader}
+        // pages={pages}
+        colorInvert={colorInvert}
+      />}
+      {/* </Container>
+      </AppBar> */}
       {open && <Sidebar
         onClose={handleSidebarClose}
         open={open}
@@ -82,7 +84,7 @@ const Main = ({ children, colorInvert = false, bgcolor = 'transparent', salesInf
         <Divider />
       </main>
       <Container paddingY={2} >
-        <Footer {...footer}/>
+        <Footer {...footer} />
       </Container>
     </Box>
   );

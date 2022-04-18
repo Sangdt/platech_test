@@ -31,26 +31,8 @@ const NavItem = ({ linkTo, title, itemName, id, items, colorInvert = false }) =>
     setOpenedPopoverId(null);
     // console.log("close")
   };
-
-  // const [activeLink, setActiveLink] = useState('');
-  // useEffect(() => {
-  //   setActiveLink(window && window.location ? window.location.pathname : '');
-  // }, []);
-  // useEffect(() => {
-  //   if (openedPopoverId === id) {
-  //     setTimeout(() => {
-  //       console.log("body style", document.body.style)
-
-  //     }, 900)
-  //   }
-  // }, [openedPopoverId]);
-
-  // const hasActiveLink = () => items.find((i) => i.href === activeLink);
   const linkColor = colorInvert ? 'common.white' : 'text.primary';
-  // const [y, setY] = useState(window.scrollY);
-
   const handleNavigation = e => handlePopoverClose()
-
   useEffect(() => {
     // setY(window.scrollY);
     window.addEventListener("scroll", handleNavigation);
@@ -65,10 +47,6 @@ const NavItem = ({ linkTo, title, itemName, id, items, colorInvert = false }) =>
     <Box
       aria-owns={openedPopoverId ? 'mouse-over-popover' : undefined}
       aria-haspopup="true"
-      // onMouseEnter={(e) => handlePopoverOpen(e, id)}
-      // onMouseLeave={e => handlePopoverClose(e)}
-      // onMouseEnter={(e) => handlePopoverOpen(e, id)}
-      // onMouseLeave={handlePopoverClose}
       aria-describedby={id}
     >
       <Box
@@ -78,19 +56,7 @@ const NavItem = ({ linkTo, title, itemName, id, items, colorInvert = false }) =>
         sx={{ cursor: 'pointer' }}
         onClick={(e) => handlePopoverOpen(e, id)}
       >
-        {/* {linkTo?.seoLinks ? <Link passHref href={linkTo?.seoLinks}>
-          <Typography
-            component='a'
-            fontWeight={openedPopoverId === id || 400}
-            color={linkColor}
-          >
-            {title}
-          </Typography>
-        </Link> :  */}
         <Typography
-          // onMouseEnter={(e) => handlePopoverOpen(e, id)}
-          // onMouseLeave={handlePopoverClose}
-          // component='a'
           fontWeight={openedPopoverId === id || 400}
           color={linkColor}
         >
@@ -138,27 +104,15 @@ const NavItem = ({ linkTo, title, itemName, id, items, colorInvert = false }) =>
         }}
       >
         <Grid container spacing={0.5}>
+          {linkTo?.seoLinks && <ChildMenu
+            linkTo={linkTo}
+            itemName={title}
+          />}
           {items.map((childMenuInfo, i) => (
-            <Grid item key={childMenuInfo.id ?? i} xs={items.length > 12 ? 6 : 12}>
-              <Link
-                href={childMenuInfo?.linkTo.seoLinks}
-                passHref
-              >
-                <Button
-                  component={'a'}
-                  fullWidth
-                  sx={{
-                    justifyContent: 'flex-start',
-                    color: theme.palette.text.primary,
-                    backgroundColor: 'transparent',
-                    fontWeight: 400,
-                  }}
-                >
-                  {childMenuInfo.itemName}
-                </Button>
-              </Link>
-
-            </Grid>
+            <ChildMenu key={`${childMenuInfo.id}_${i}`}
+              {...childMenuInfo}
+              length={items.length}
+            />
           ))}
         </Grid>
       </Popover>
@@ -166,6 +120,144 @@ const NavItem = ({ linkTo, title, itemName, id, items, colorInvert = false }) =>
     </Box>
   );
 };
+
+const ChildMenu = ({ id, length, linkTo, itemName, childItem }) => {
+  const theme = useTheme();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [openedPopoverId, setOpenedPopoverId] = useState(null);
+
+  const handlePopoverOpen = (event, popoverId) => {
+    setAnchorEl(event.target);
+    setOpenedPopoverId(popoverId);
+    // console.log("openned", event, popoverId)
+  };
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null);
+    setOpenedPopoverId(null);
+    // console.log("close")
+  };
+  // const linkColor = colorInvert ? 'common.white' : 'text.primary';
+  const handleNavigation = e => handlePopoverClose()
+  useEffect(() => {
+    // setY(window.scrollY);
+    window.addEventListener("scroll", handleNavigation);
+
+    return () => {
+      window.removeEventListener("scroll", handleNavigation);
+    };
+  }, []);
+
+  return (<>
+    <Grid item xs={length > 12 ? 6 : 12}>
+      <Button
+        onClick={(e) => handlePopoverOpen(e, id)}
+        component={'a'}
+        fullWidth
+        sx={{
+          justifyContent: 'flex-start',
+          color: theme.palette.text.primary,
+          backgroundColor: 'transparent',
+          fontWeight: 400,
+        }}
+      >
+        {itemName}
+        {checkArrNotEmpty(childItem) && <ExpandMoreIcon
+          sx={{
+            marginLeft: theme.spacing(1 / 4),
+            width: 16,
+            height: 16,
+            transform: openedPopoverId === id ? 'rotate(-95deg)' : 'none',
+            // color: linkColor
+          }}
+        />}
+      </Button>
+    </Grid>
+    {(openedPopoverId === id) && (checkArrNotEmpty(childItem)) && <Popover
+      disableScrollLock={true}
+      elevation={3}
+      id={id}
+      open={openedPopoverId === id}
+      anchorEl={anchorEl}
+      onClose={handlePopoverClose}
+      disableRestoreFocus
+      // disableScrollLock
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'center',
+      }}
+      sx={{
+        '.MuiPaper-root': {
+          maxWidth: childItem?.length > 12 ? 350 : 250,
+          padding: 2,
+          marginTop: 2,
+          marginLeft: 17.5,
+          borderTopRightRadius: 0,
+          borderTopLeftRadius: 0,
+          borderBottomRightRadius: 8,
+          borderBottomLeftRadius: 8,
+          borderTop: `3px solid ${theme.palette.primary.main}`,
+        },
+      }}
+    >
+      <Grid container spacing={0.5}>
+        {linkTo?.seoLinks && <Link
+          href={linkTo?.seoLinks ?? "/"}
+          passHref
+        >
+          <Button
+            onClick={(e) => handlePopoverOpen(e, id)}
+            component={'a'}
+            fullWidth
+            sx={{
+              justifyContent: 'flex-start',
+              color: theme.palette.text.primary,
+              backgroundColor: 'transparent',
+              fontWeight: 400,
+            }}
+          >
+            {itemName}
+          </Button>
+        </Link>}
+        {checkArrNotEmpty(childItem) && childItem.map((childMenuInfo, i) => (<MenuItem
+          key={`${childMenuInfo.id}_${i}`}
+          {...childMenuInfo} theme={theme} length={childItem.length} />
+        ))}
+      </Grid>
+    </Popover>}
+  </>);
+}
+
+const MenuItem = ({ length, linkTo, itemName, theme }) => (<Grid item xs={length > 12 ? 6 : 12}>
+  <Link
+    href={linkTo?.seoLinks ?? "/"}
+    passHref={true}
+  >
+    <Button
+      component={'a'}
+      fullWidth
+      sx={{
+        justifyContent: 'flex-start', 
+        color: theme.palette.text.primary,
+        backgroundColor: 'transparent',
+        fontWeight: 400,
+      }}
+    >
+      {itemName}
+    </Button>
+  </Link>
+</Grid>);
+
+// const ReturnLink = ({ href, children, ...rest }) => href ? <>{children}</> : <Link
+//   href={href ?? "/"}
+//   {...rest}
+// >
+//   {children}
+// </Link>
 
 NavItem.propTypes = {
   title: PropTypes.string.isRequired,

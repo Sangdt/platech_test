@@ -24,7 +24,8 @@ function getCsp(nonce) {
   csp += `form-action 'self' https://analytics.google.com https://www.facebook.com https://connect.facebook.net https://www.google-analytics.com  http://www.googletagmanager.com;`;
   csp += ``;
   csp += `default-src 'self';`;
-  csp += `script-src 'self' ${prod ? "" : "'unsafe-eval'"} 'nonce-${nonce}' 'strict-dynamic' https://www.google.com https://analytics.google.com http://www.youtube.com https://connect.facebook.net https://www.googletagmanager.com  https://polyfill.io https://maps.googleapis.com  https://www.google-analytics.com https://cdn.ampproject.org https://ssl.google-analytics.com;`; // NextJS requires 'unsafe-eval' in dev (faster source maps)
+  // csp += `script-src 'self' ${prod ? "" : "'unsafe-eval'"} 'nonce-${nonce}' 'strict-dynamic' https://www.google.com https://analytics.google.com http://www.youtube.com https://connect.facebook.net https://www.googletagmanager.com  https://polyfill.io https://maps.googleapis.com  https://www.google-analytics.com https://cdn.ampproject.org https://ssl.google-analytics.com;`; // NextJS requires 'unsafe-eval' in dev (faster source maps)
+  csp += `script-src 'self' ${prod ? "" : "'unsafe-eval'"} 'nonce-${nonce}' 'strict-dynamic' ;`; // NextJS requires 'unsafe-eval' in dev (faster source maps)
   // csp += `default-src 'self'; style-src ${prod ? `'nonce-${nonce}'` : "'unsafe-inline'"}  https://www.google-analytics.com https://maps.gstatic.com https://connect.facebook.net https://fonts.googleapis.com data:;`; // NextJS requires 'unsafe-inline'
   csp += `style-src 'self' 'unsafe-inline'  https://www.google.com https://www.google-analytics.com https://maps.gstatic.com https://connect.facebook.net https://fonts.googleapis.com data:;`; // NextJS requires 'unsafe-inline'
   csp += `img-src 'self' https://cdn.sanity.io https://www.google.com.vn https://analytics.google.com http://www.googletagmanager.com https://www.google.com https://www.facebook.com https://www.datocms-assets.com https://maps.googleapis.com https://www.google-analytics.com https://maps.gstatic.com data: blob:;`;
@@ -57,29 +58,6 @@ export default class MyDocument extends Document {
 
 MyDocument.getInitialProps = async (ctx) => {
   const nonce = nanoid(10);
-
-  // console.log("document ctx",ctx?.res?.get('User-Agent'));
-  // emotionCache.compat = true;
-  // let UA;
-  // const styles = [...flush({ nonce })]
-  // let CspSettled = false;
-  // const res = ctx?.res
-  // console.log("res", res);
-  // if (typeof ctx?.res?.setHeader !== "undefined") {
-  //   ctx.res.setHeader('Content-Security-Policy', getCsp(nonce));
-  //   ctx.res.setHeader('csp-nonce', nonce);
-  //     console.log("1 setting CSP with nonce:", nonce);
-
-  //   CspSettled = true;
-  // } else if (typeof ctx?.res?.writeHead !== "undefined") {
-  //   ctx.res.writeHead(200,
-  //     { 'Content-Security-Policy': getCsp(nonce), 'csp-nonce': nonce });
-  //     console.log(" 2 setting CSP with nonce:", nonce);
-
-  //   CspSettled = true;
-
-  // }
-  // Render app and page and get the context of the page with collected side effects.
   const originalRenderPage = ctx.renderPage;
   const { extractCriticalToChunks } = createEmotionServer(emotionCache(nonce));
   // console.log("UA", UA)
@@ -102,7 +80,7 @@ MyDocument.getInitialProps = async (ctx) => {
     />
   ));
   // console.log("initialProps.styles", initialProps.styles)
-  if(ctx.res)ctx.res.setHeader('Content-Security-Policy', getCsp(nonce))
+  if (ctx.res) ctx.res.setHeader('Content-Security-Policy', getCsp(nonce))
 
   return {
     ...initialProps,
