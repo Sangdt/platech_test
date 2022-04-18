@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import { alpha, useTheme } from '@mui/material/styles';
-import MenuIcon from '@mui/icons-material/Menu';
+// import Button from '@mui/material/Button';
+// import { useTheme } from '@mui/material/styles';
+// import MenuIcon from '@mui/icons-material/Menu';
 import Link from 'next/link'
 import NavItem from './components/NavItem/NavItem';
 import { Image } from 'react-datocms'
@@ -15,7 +15,7 @@ const Topbar = ({ onSidebarOpen, bgcolor, pages, colorInvert = false, menuItems,
   // console.log("menuItems", menuItems)
   // console.log("colorInvert",colorInvert)
 
-  const theme = useTheme();
+  // const theme = useTheme();
   // const { mode } = theme.palette;
   // const {
   //   landings: landingPages,
@@ -26,7 +26,8 @@ const Topbar = ({ onSidebarOpen, bgcolor, pages, colorInvert = false, menuItems,
   //   blog: blogPages,
   // } = pages;
 
-  return (<AppBar
+  return (
+  <AppBar
     position={'relative'}
     sx={{
       zIndex: 100,
@@ -59,21 +60,6 @@ const Topbar = ({ onSidebarOpen, bgcolor, pages, colorInvert = false, menuItems,
             </Box>))}
 
 
-        </Box>
-        <Box sx={{ display: { xs: 'block', md: 'none' } }} alignItems={'center'}>
-          <Button
-            onClick={() => onSidebarOpen()}
-            aria-label="Menu"
-            variant={'outlined'}
-            sx={{
-              borderRadius: 2,
-              minWidth: 'auto',
-              padding: 1,
-              borderColor: alpha(theme.palette.divider, 0.2),
-            }}
-          >
-            <MenuIcon />
-          </Button>
         </Box>
       </Box>
     </Container>

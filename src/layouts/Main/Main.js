@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useTheme } from '@mui/material/styles';
+import { alpha, useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
+import Button from '@mui/material/Button';
+// import { useTheme } from '@mui/material/styles';
+import MenuIcon from '@mui/icons-material/Menu';
+// import { Image } from 'react-datocms'
+
 // import AppBar from '@mui/material/AppBar';
 // import useScrollTrigger from '@mui/material/useScrollTrigger';
 import dynamic from 'next/dynamic';
@@ -25,12 +30,13 @@ const Main = ({ children, colorInvert = false, bgcolor = 'transparent', salesInf
   // console.log("pageHeader", pageHeader)
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
-    defaultMatches: true,
+    defaultMatches: false,
   });
 
   const [openSidebar, setOpenSidebar] = useState(false);
 
   const handleSidebarOpen = () => {
+    console.log("isMd",isMd)
     setOpenSidebar(true);
   };
 
@@ -71,6 +77,24 @@ const Main = ({ children, colorInvert = false, bgcolor = 'transparent', salesInf
         // pages={pages}
         colorInvert={colorInvert}
       />}
+      <Box sx={{ display: { xs: 'block', md: 'none' } }} alignItems={'center'}>
+        <Button
+          onClick={() => handleSidebarOpen()}
+          aria-label="Menu"
+          variant={'outlined'}
+          sx={{
+            float: "right",
+            marginRight:2,
+            marginBottom:2,
+            borderRadius: 2,
+            minWidth: 'auto',
+            padding: 1,
+            borderColor: alpha(theme.palette.divider, 0.2),
+          }}
+        >
+          <MenuIcon />
+        </Button>
+      </Box>
       {/* </Container>
       </AppBar> */}
       {open && <Sidebar
