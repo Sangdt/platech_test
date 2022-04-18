@@ -36,7 +36,7 @@ const Main = ({ children, colorInvert = false, bgcolor = 'transparent', salesInf
   const [openSidebar, setOpenSidebar] = useState(false);
 
   const handleSidebarOpen = () => {
-    console.log("isMd",isMd)
+    console.log("isMd", isMd)
     setOpenSidebar(true);
   };
 
@@ -52,7 +52,7 @@ const Main = ({ children, colorInvert = false, bgcolor = 'transparent', salesInf
   // });
 
   return (
-    <Box>
+    <Box >
       <Box bgcolor={bgcolor}
         position={'relative'}
         zIndex={theme.zIndex.appBar}>
@@ -60,16 +60,6 @@ const Main = ({ children, colorInvert = false, bgcolor = 'transparent', salesInf
           <TopNav colorInvert={colorInvert} topPageHeader={pageHeader.topPageHeader} />
         </Container>
       </Box>
-      {/* <AppBar
-        position={'relative'}
-        sx={{
-          zIndex: 100,
-          // top: 40,
-          backgroundColor: bgcolor
-        }}
-        elevation={0}
-      >
-        <Container paddingY={1}> */}
       {isMd && <Topbar
         bgcolor={bgcolor}
         onSidebarOpen={handleSidebarOpen}
@@ -77,15 +67,15 @@ const Main = ({ children, colorInvert = false, bgcolor = 'transparent', salesInf
         // pages={pages}
         colorInvert={colorInvert}
       />}
-      <Box sx={{ display: { xs: 'block', md: 'none' } }} alignItems={'center'}>
+      <Box sx={{ display: { xs: 'block', md: 'none' } }} alignItems={'center'} paddingBottom={10}> 
         <Button
           onClick={() => handleSidebarOpen()}
           aria-label="Menu"
           variant={'outlined'}
           sx={{
             float: "right",
-            marginRight:2,
-            marginBottom:2,
+            marginRight: 2,
+            marginBottom: 2,
             borderRadius: 2,
             minWidth: 'auto',
             padding: 1,

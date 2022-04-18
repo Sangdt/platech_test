@@ -28,7 +28,7 @@ const CallNow = ({ phoneNumber }) => (<Box marginRight={{ xs: 1, sm: 2 }}>
       display={'inline-flex'}
       borderRadius={1}
       bgcolor={'primary.main'}
-      marginLeft={1}
+      marginLeft={{ xs: 0, sm: 1 }}
     >
       <Typography
         variant={'caption'}
