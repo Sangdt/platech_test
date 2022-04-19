@@ -26,17 +26,10 @@ export default function App(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
 
-  console.log("test",pageProps.nonce)
+  // console.log("test", pageProps.nonce)
   return (
     <CacheProvider value={emotionCache} >
       <DefaultHeadTags {...SeoAndLayoutContent?.seo} />
-      {/* <Head>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
-        <title>theFront | UI Kit by Maccarian Agency.</title>
-      </Head> */}
       <Page>
         <Main {...SeoAndLayoutContent}>
           <Component {...pageProps} />

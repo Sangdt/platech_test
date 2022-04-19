@@ -42,7 +42,7 @@ const Index = ({ homePageData, ...rest }) => {
 
 export async function getStaticProps(context) {
   const homePageData = await getHomepageData();
-  console.log("test", context);
+  // console.log("test", context);
   return {
     props: { homePageData }, // will be passed to the page component as props
     revalidate: 1200
