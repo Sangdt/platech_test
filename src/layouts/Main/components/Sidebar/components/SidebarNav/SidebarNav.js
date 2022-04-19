@@ -2,93 +2,81 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { useTheme } from '@mui/material/styles';
+// import { useTheme } from '@mui/material/styles';
+import { Image } from 'react-datocms'
 
 import NavItem from './components/NavItem';
+import Link from 'next/link'
+import { checkArrNotEmpty } from 'Helper/checkArrNotEmpty';
 
-const SidebarNav = ({ pages }) => {
-  const theme = useTheme();
-  const { mode } = theme.palette;
+const SidebarNav = ({ item_info, pageLogo }) => {
+  console.log("item_info", item_info)
+  // const theme = useTheme();
+  // const { mode } = theme.palette;
 
-  const {
-    landings: landingPages,
-    secondary: secondaryPages,
-    company: companyPages,
-    account: accountPages,
-    portfolio: portfolioPages,
-    blog: blogPages,
-  } = pages;
+  // const {
+  //   landings: landingPages,
+  //   secondary: secondaryPages,
+  //   company: companyPages,
+  //   account: accountPages,
+  //   portfolio: portfolioPages,
+  //   blog: blogPages,
+  // } = pages;
 
   return (
     <Box>
       <Box width={1} paddingX={2} paddingY={1}>
-        <Box
+        {pageLogo?.logo_detail && <Box
           display={'flex'}
-          component="a"
-          href="/"
-          title="theFront"
-          width={{ xs: 100, md: 120 }}
+        // width={{ xs: 100, md: 120 }}
         >
-          <Box
-            component={'img'}
-            src={
-              mode === 'light'
-                ? 'https://assets.maccarianagency.com/the-front/logos/logo.svg'
-                : 'https://assets.maccarianagency.com/the-front/logos/logo-negative.svg'
-            }
-            height={1}
-            width={1}
-          />
-        </Box>
+          <PageLogo {...pageLogo?.logo_detail} />
+        </Box>}
       </Box>
-      <Box paddingX={2} paddingY={2}>
-        <Box>
-          <NavItem title={'Landings'} items={landingPages} />
-        </Box>
-        <Box>
-          <NavItem title={'Company'} items={companyPages} />
-        </Box>
-        <Box>
-          <NavItem title={'Pages'} items={secondaryPages} />
-        </Box>
-        <Box>
-          <NavItem title={'Account'} items={accountPages} />
-        </Box>
-        <Box>
-          <NavItem title={'Blog'} items={blogPages} />
-        </Box>
-        <Box>
-          <NavItem title={'Portfolio'} items={portfolioPages} />
-        </Box>
-        <Box marginTop={2}>
-          <Button
-            size={'large'}
-            variant="outlined"
-            fullWidth
-            component="a"
-            href="/docs/introduction"
-          >
-            Documentation
-          </Button>
-        </Box>
-        <Box marginTop={1}>
-          <Button
-            size={'large'}
-            variant="contained"
-            color="primary"
-            fullWidth
-            component="a"
-            target="blank"
-            href="https://mui.com/store/items/the-front-landing-page/"
-          >
-            Purchase now
-          </Button>
-        </Box>
-      </Box>
+      {checkArrNotEmpty(item_info) && <Box paddingX={2} paddingY={2}>
+        {item_info.map((item, index) => (<Box key={`${item.id}_${index}`}>
+          <NavItem {...item} />
+        </Box>))}
+      </Box>}
     </Box>
   );
 };
+const PageLogo = ({ linkTo, image }) => {
+  // console.log("{linkTo, image}", {linkTo, image})
+  if (linkTo) {
+    return (<Link href={linkTo.seoLinks} passHref>
+      <Box
+        display={'flex'}
+        width={{ xs: 100, md: 120 }}
+        component={"a"}
+        className='logo'
+        // href="/"
+        title="theFront"
+      >
+        {image?.responsiveImage && <span className="bg-logo sm:mr-8 mr-0"> <Image
+          component={Image}
+          data={image.responsiveImage}
+          className="sm:w-32 w-30"
 
+        />
+        </span>}
+      </Box>
+    </Link>
+    );
+  }
+  return (<>
+    {image && <span className="bg-logo sm:mr-8 mr-0"> <Image
+      component={Image}
+      data={image.responsiveImage}
+      className="sm:w-32 w-30"
+
+    />
+    </span>
+    }
+  </>);
+
+
+}
 SidebarNav.propTypes = {
   pages: PropTypes.object.isRequired,
 };

@@ -67,7 +67,7 @@ const Main = ({ children, colorInvert = false, bgcolor = 'transparent', salesInf
         // pages={pages}
         colorInvert={colorInvert}
       />}
-      <Box sx={{ display: { xs: 'block', md: 'none' } }} alignItems={'center'} paddingBottom={10}> 
+      <Box sx={{ display: { xs: 'block', md: 'none' } }} alignItems={'center'} paddingBottom={10}>
         <Button
           onClick={() => handleSidebarOpen()}
           aria-label="Menu"
@@ -88,6 +88,7 @@ const Main = ({ children, colorInvert = false, bgcolor = 'transparent', salesInf
       {/* </Container>
       </AppBar> */}
       {open && <Sidebar
+        {...pageHeader}
         onClose={handleSidebarClose}
         open={open}
         variant="temporary"
