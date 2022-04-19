@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { alpha, useTheme } from '@mui/material/styles';
+import React from 'react';
+import { useTheme } from '@mui/material/styles';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -12,45 +11,36 @@ import Typography from '@mui/material/Typography';
 import { checkArrNotEmpty } from 'Helper/checkArrNotEmpty';
 import Link from 'next/link'
 
-const NavItem = ({ linkTo, id, name, childItems = [] }) => {
-  // console.log("linkTo", linkTo)
-  // const [activeLink, setActiveLink] = useState('');
-  // useEffect(() => {
-  //   setActiveLink(window && window.location ? window.location.pathname : '');
-  // }, []);
-
-  // const hasActiveLink = () => items.find((i) => i.href === activeLink);
-
-  return (
-    <Box>
-      <Accordion
-        disableGutters
-        elevation={0}
-        sx={{ backgroundColor: 'transparent' }}
+const NavItem = ({ linkTo, id, name, childItems = [] }) => (
+  <Box>
+    <Accordion
+      disableGutters
+      elevation={0}
+      sx={{ backgroundColor: 'transparent' }}
+    >
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon />}
+        aria-controls="panel1a-content"
+        id="panel1a-header"
+        sx={{ padding: 0 }}
       >
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-          sx={{ padding: 0 }}
+        <Typography
+          fontWeight={400}
+          color={'text.primary'}
         >
-          <Typography
-            fontWeight={400}
-            color={'text.primary'}
-          >
-            {name}
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails sx={{ padding: 0 }}>
-          <Grid container spacing={1}>
-            {linkTo && <SingleMenuItem {...linkTo} itemName={name} />}
-            {checkArrNotEmpty(childItems) && childItems.map((itemInfo, index) => (<SingleMenuItem key={`${itemInfo.id}__${index}`} {...itemInfo} />))}
-          </Grid>
-        </AccordionDetails>
-      </Accordion>
-    </Box>
-  );
-};
+          {name}
+        </Typography>
+      </AccordionSummary>
+      <AccordionDetails sx={{ padding: 0 }}>
+        <Grid container spacing={1}>
+          {linkTo && <SingleMenuItem {...linkTo} itemName={name} />}
+          {checkArrNotEmpty(childItems) && childItems.map((itemInfo, index) => (<SingleMenuItem key={`${itemInfo.id}__${index}`} {...itemInfo} />))}
+        </Grid>
+      </AccordionDetails>
+    </Accordion>
+  </Box>
+);
+
 const SingleMenuItem = ({ id, seoLinks, itemName, childItem = [] }) => {
   const theme = useTheme();
   if (checkArrNotEmpty(childItem)) {
@@ -99,14 +89,5 @@ const SingleMenuItem = ({ id, seoLinks, itemName, childItem = [] }) => {
     </Link>
   </Grid>)
 }
-
-// const MenuItem =({})=>{
-
-// }
-// NavItem.propTypes = {
-//   items: PropTypes.array.isRequired,
-//   title: PropTypes.string.isRequired,
-//   onClose: PropTypes.func,
-// };
 
 export default NavItem;
