@@ -7,7 +7,7 @@
   "scripts": {
     "analyze": "cross-env ANALYZE=true next build",
     "dev": "cross-env NODE_OPTIONS='--inspect' next dev",
-    "build": "cross-env NODE_ENV=production next build",
+    "build": "cross-env ANALYZE=true next build",
     "start": "next start",
     "prettier:fix": "prettier './src/**/*.js' --write",
     "eslint:fix": "eslint ./src --fix",

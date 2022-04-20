@@ -134,8 +134,8 @@ const Spaces = ({ productList }) => {
       </Box>
 
       <Box maxWidth={{ xs: 420, sm: 620, md: 1 }} margin={'0 auto'}>
-      <Button aria-label="Previous" className="glider-prev flex-1 relative top-72 m-5">«</Button>
-      <Button aria-label="Next" className="glider-next float-right top-72 m-5">»</Button>
+        <Button aria-label="Previous" className="glider-prev flex-1 relative top-72 m-5">«</Button>
+        <Button aria-label="Next" className="glider-next float-right top-72 m-5">»</Button>
 
         <Box className="glider" display={"flex"} >
           {productList.map((item, i) => (
