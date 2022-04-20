@@ -1,5 +1,5 @@
 import React from 'react';
-import withHydrationOnDemand from "react-hydration-on-demand";
+// import withHydrationOnDemand from "react-hydration-on-demand";
 // import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Link from 'next/link'
 import Box from '@mui/material/Box';
@@ -12,6 +12,7 @@ import Divider from '@mui/material/Divider';
 import { Image as DatoCMSImage } from "react-datocms"
 
 import Container from 'components/Container';
+
 const LeftSide = ({ label, shortDescription, CTAbtn }) => {
   // const theme = useTheme();
 
@@ -138,4 +139,4 @@ const Hero = ({ headerImage, label, shortDescription, CTAbtn }) => {
   );
 };
 
-export default withHydrationOnDemand({ on: ["visible"] })(Hero);
+export default Hero;
