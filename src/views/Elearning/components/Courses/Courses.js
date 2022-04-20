@@ -17,7 +17,7 @@ import { useTheme } from '@mui/material/styles';
 import { Image as DatoCMSImage } from "react-datocms"
 import Link from 'next/link'
 import Script from 'next/script'
-
+import useInView from "react-cool-inview";
 
 // const mock = [
 //   {
@@ -76,20 +76,21 @@ import Script from 'next/script'
 
 const Spaces = ({ productList }) => {
   const [nonceValue, setNonce] = useState(null);
-  useEffect(() => {
-    // console.log("nonce", document.head.querySelector("[property~=csp-nonce][content]").content)
-    if (!nonceValue) setNonce(document.head.querySelector("[property~=csp-nonce][content]").content)
-  }, []);
+  const [loadCarousel, setloadCarousel] = useState(false);
+  const { observe,inView } = useInView({
+    threshold: 0.25, // Default is 0
+    onEnter: () => {
+      console.log("enter view")
+      if (!nonceValue) setNonce(document.head.querySelector("[property~=csp-nonce][content]").content)
+    },
+  });
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
   });
-  const [loadCarousel, setloadCarousel] = useState(false)
-
-
   return (<>
     {loadCarousel && <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.css" />}
-    <Box >
+    <Box  ref={observe}>
       <Box marginBottom={4}>
         <Typography variant={"h4"} align={'center'} gutterBottom sx={{ fontWeight: 700, }} >
           Các sản phẩm mới
@@ -216,10 +217,10 @@ const Spaces = ({ productList }) => {
       <button aria-label="Next" className="glider-next">»</button> */}
       <div role="tablist" className="dots"></div>
     </Box >
-    {nonceValue && <Script
+    {(nonceValue || inView) && <Script
       nonce={nonceValue}
       id="Glider-js"
-      strategy="lazyOnload"
+      // strategy="lazyOnload"
       src="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.js"
       onLoad={() => {
         setloadCarousel(true);
