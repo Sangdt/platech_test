@@ -109,7 +109,7 @@ const NavItem = ({ linkTo, title, itemName, id, items, colorInvert = false }) =>
             passHref
           >
             <Button
-              onClick={(e) => handlePopoverOpen(e, id)}
+              // onClick={(e) => handlePopoverOpen(e, id)}
               component={'a'}
               fullWidth
               sx={{
@@ -119,7 +119,7 @@ const NavItem = ({ linkTo, title, itemName, id, items, colorInvert = false }) =>
                 fontWeight: 400,
               }}
             >
-              {itemName}
+              {title}
             </Button>
           </Link>}
           {items.map((childMenuInfo, i) => (

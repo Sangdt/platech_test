@@ -77,7 +77,7 @@ import useInView from "react-cool-inview";
 const Spaces = ({ productList }) => {
   const [nonceValue, setNonce] = useState(null);
   const [loadCarousel, setloadCarousel] = useState(false);
-  const { observe,inView } = useInView({
+  const { observe, inView } = useInView({
     threshold: 0.25, // Default is 0
     onEnter: () => {
       console.log("enter view")
@@ -89,8 +89,8 @@ const Spaces = ({ productList }) => {
     defaultMatches: true,
   });
   return (<>
-    {loadCarousel && <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.css" />}
-    <Box  ref={observe}>
+    {/* {loadCarousel && <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.css" />} */}
+    <Box ref={observe}>
       <Box marginBottom={4}>
         <Typography variant={"h4"} align={'center'} gutterBottom sx={{ fontWeight: 700, }} >
           Các sản phẩm mới
@@ -132,90 +132,97 @@ const Spaces = ({ productList }) => {
           </Link>
         </Box>
       </Box>
-      <Box maxWidth={{ xs: 420, sm: 620, md: 1 }} margin={'0 auto'} display={loadCarousel ? 'flex' : ""} className="glider">
-        {productList.map((item, i) => (
-          <Box key={`${i}_${item.id}`} padding={{ xs: 1, md: 2, lg: 3 }}>
-            <Box
-              display={'block'}
-              width={1}
-              height={1}
-              sx={{
-                textDecoration: 'none',
-                transition: 'all .2s ease-in-out',
-                '&:hover': {
-                  transform: `translateY(-${theme.spacing(1 / 2)})`,
-                },
-              }}
-            >
+
+      <Box maxWidth={{ xs: 420, sm: 620, md: 1 }} margin={'0 auto'}>
+      <Button aria-label="Previous" className="glider-prev flex-1 relative top-72 m-5">«</Button>
+      <Button aria-label="Next" className="glider-next float-right top-72 m-5">»</Button>
+
+        <Box className="glider" display={"flex"} >
+          {productList.map((item, i) => (
+            <Box key={`${i}_${item.id}`} padding={{ xs: 1, md: 2, lg: 3 }}>
               <Box
-                component={Card}
-                maxWidth={450}
+                display={'block'}
+                width={1}
                 height={1}
-                display={'flex'}
-                flexDirection={'column'}
-                sx={{ backgroundImage: 'none' }}
+                sx={{
+                  textDecoration: 'none',
+                  transition: 'all .2s ease-in-out',
+                  '&:hover': {
+                    transform: `translateY(-${theme.spacing(1 / 2)})`,
+                  },
+                }}
               >
-                {item?.headerImage?.responsiveImage && <CardMedia
-                  // title={item.headerImage.responsiveImage.title}
-                  // alt={item.headerImage.responsiveImage.alt}
-                  data={item?.headerImage?.responsiveImage ?? null}
-                  component={item?.headerImage?.responsiveImage ? DatoCMSImage : null}
-                  // image={item.media}
-                  sx={{
-                    position: 'relative',
-                    height: { xs: 240, sm: 340, md: 280 },
-                    overflow: 'hidden',
-                  }}
+                <Box
+                  component={Card}
+                  maxWidth={450}
+                  height={1}
+                  display={'flex'}
+                  flexDirection={'column'}
+                  sx={{ backgroundImage: 'none' }}
                 >
-                  {item.price && <Box
-                    display={'flex'}
-                    justifyContent={'space-between'}
-                    position={'absolute'}
-                    bottom={0}
-                    padding={2}
-                    width={1}
-                    zIndex={2}
+                  {item?.headerImage?.responsiveImage && <CardMedia
+                    // title={item.headerImage.responsiveImage.title}
+                    // alt={item.headerImage.responsiveImage.alt}
+                    data={item?.headerImage?.responsiveImage ?? null}
+                    component={item?.headerImage?.responsiveImage ? DatoCMSImage : null}
+                    // image={item.media}
+                    sx={{
+                      position: 'relative',
+                      height: { xs: 240, sm: 340, md: 280 },
+                      overflow: 'hidden',
+                    }}
                   >
-                    <Box
-                      padding={1}
-                      bgcolor={'background.paper'}
-                      boxShadow={1}
-                      borderRadius={2}
+                    {item.price && <Box
+                      display={'flex'}
+                      justifyContent={'space-between'}
+                      position={'absolute'}
+                      bottom={0}
+                      padding={2}
+                      width={1}
+                      zIndex={2}
                     >
-                      <Typography sx={{ fontWeight: 600 }}>
-                        {item.price}
-                      </Typography>
-                    </Box>
-                  </Box>}
-                </CardMedia>}
-                <CardContent>
-                  <Typography
-                    variant={'h6'}
-                    gutterBottom
-                    align={'left'}
-                    sx={{ fontWeight: 700 }}
-                  >
-                    {item.productName}
-                  </Typography>
-                </CardContent>
-                <Box flexGrow={1} />
-                {item?.seoLinks && <CardActions sx={{ justifyContent: 'flex-end' }}>
-                  <Link href={"/san-pham/" + item?.seoLinks}>
-                    <Button
-                      component={'a'}
-                      variant="contained" size="medium">
-                      Xem thêm
-                    </Button>
-                  </Link>
-                </CardActions>}
+                      <Box
+                        padding={1}
+                        bgcolor={'background.paper'}
+                        boxShadow={1}
+                        borderRadius={2}
+                      >
+                        <Typography sx={{ fontWeight: 600 }}>
+                          {item.price}
+                        </Typography>
+                      </Box>
+                    </Box>}
+                  </CardMedia>}
+                  <CardContent>
+                    <Typography
+                      variant={'h6'}
+                      gutterBottom
+                      align={'left'}
+                      sx={{ fontWeight: 700 }}
+                    >
+                      {item.productName}
+                    </Typography>
+                  </CardContent>
+                  <Box flexGrow={1} />
+                  {item?.seoLinks && <CardActions sx={{ justifyContent: 'flex-end' }}>
+                    <Link href={"/san-pham/" + item?.seoLinks}>
+                      <Button
+                        component={'a'}
+                        variant="contained" size="medium">
+                        Xem thêm
+                      </Button>
+                    </Link>
+                  </CardActions>}
+                </Box>
               </Box>
             </Box>
-          </Box>
-        ))}
+          ))}
+
+        </Box>
+
       </Box>
-      {/* <button aria-label="Previous" className="glider-prev">«</button>
-      <button aria-label="Next" className="glider-next">»</button> */}
       <div role="tablist" className="dots"></div>
+
     </Box >
     {(nonceValue || inView) && <Script
       nonce={nonceValue}
@@ -230,13 +237,159 @@ const Spaces = ({ productList }) => {
           slidesToShow: 3,
           draggable: true,
           dots: '.dots',
-          // arrows: {
-          //   prev: '.glider-prev',
-          //   next: '.glider-next'
-          // }
+          arrows: {
+            prev: '.glider-prev',
+            next: '.glider-next'
+          }
         });
       }}
     />}
+    {(nonceValue || inView) && <style jsx global>{`.glider, .glider-contain {
+  margin: 0 auto;
+  position: relative
+}
+
+.glider, .glider-track {
+  transform: translateZ(0)
+}
+
+.glider-dot, .glider-next, .glider-prev {
+  border: 0;
+  padding: 0;
+  user-select: none;
+  outline: 0
+}
+
+.glider-contain {
+  width: 100%
+}
+
+.glider {
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none
+}
+
+.glider-track {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  z-index: 1
+}
+
+.glider.draggable {
+  user-select: none;
+  cursor: -webkit-grab;
+  cursor: grab
+}
+
+.glider.draggable .glider-slide img {
+  user-select: none;
+  pointer-events: none
+}
+
+.glider.drag {
+  cursor: -webkit-grabbing;
+  cursor: grabbing
+}
+
+.glider-slide {
+  user-select: none;
+  justify-content: center;
+  align-content: center;
+  width: 100%;
+  min-width: 150px
+}
+
+.glider-slide img {
+  max-width: 100%
+}
+
+.glider::-webkit-scrollbar {
+  opacity: 0;
+  height: 0
+}
+
+.glider-next, .glider-prev {
+  // position: absolute;
+  background: 0 0;
+  z-index: 2;
+  font-size: 40px;
+  text-decoration: none;
+  left: -23px;
+  // top: 30%;
+  cursor: pointer;
+  color: #00ff08;
+  opacity: 1;
+  line-height: 1;
+  transition: opacity .5s cubic-bezier(.17, .67, .83, .67), color .5s cubic-bezier(.17, .67, .83, .67)
+}
+
+.glider-next:focus, .glider-next:hover, .glider-prev:focus, .glider-prev:hover {
+  color: #00ff08;
+}
+
+.glider-next {
+  right: -23px;
+  left: auto
+}
+
+.glider-next.disabled, .glider-prev.disabled {
+  opacity: .25;
+  color: #00ff08;
+  cursor: default
+}
+
+.glider-hide {
+  opacity: 0
+}
+
+.glider-dots {
+  user-select: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 0
+}
+
+.glider-dot {
+  display: block;
+  cursor: pointer;
+  color: #ccc;
+  border-radius: 999px;
+  background: #ccc;
+  width: 12px;
+  height: 12px;
+  margin: 7px
+}
+
+.glider-dot:focus, .glider-dot:hover {
+  background: #ddd
+}
+
+.glider-dot.active {
+  background: #a89cc8
+}
+
+@media(max-width:36em) {
+  .glider::-webkit-scrollbar {
+    opacity: 1;
+    -webkit-appearance: none;
+    width: 7px;
+    height: 3px
+  }
+
+  .glider::-webkit-scrollbar-thumb {
+    opacity: 1;
+    border-radius: 99px;
+    background-color: rgba(156, 156, 156, .25);
+    -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .25);
+    box-shadow: 0 0 1px rgba(255, 255, 255, .25)
+  }
+}
+`}</style>}
   </>
   );
 };
@@ -270,5 +423,5 @@ const Spaces = ({ productList }) => {
 //   // customTransition: 'all .5',
 //   // transitionDuration: 500,
 // };
-export default withHydrationOnDemand({on: ["visible"] })(Spaces);
+export default withHydrationOnDemand({ on: ["visible"] })(Spaces);
 // export default Spaces

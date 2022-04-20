@@ -3,6 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 /* since nested groupes are not supported we have to use 
      regular css for the nested dropdowns  
   */
