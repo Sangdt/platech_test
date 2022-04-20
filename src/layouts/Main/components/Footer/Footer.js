@@ -11,6 +11,7 @@ import Instagram from '@mui/icons-material/Instagram';
 import Zalo from 'styles/svg/icon/zalo'
 import { checkArrNotEmpty } from 'Helper/checkArrNotEmpty';
 // import { Instagram } from '@mui/icons-material';
+import withHydrationOnDemand from "react-hydration-on-demand";
 
 const SocialLinks = ({ channel, linkToSocial }) => {
   switch (channel) {
@@ -92,4 +93,4 @@ const Footer = ({ socialLink, other_info, footerInfo }) => {
   );
 };
 
-export default Footer;
+export default withHydrationOnDemand({ on: ["visible"] })(Footer);

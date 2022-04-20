@@ -104,10 +104,24 @@ const NavItem = ({ linkTo, title, itemName, id, items, colorInvert = false }) =>
         }}
       >
         <Grid container spacing={0.5}>
-          {linkTo?.seoLinks && <ChildMenu
-            linkTo={linkTo}
-            itemName={title}
-          />}
+          {linkTo?.seoLinks && <Link
+            href={linkTo?.seoLinks ?? "/"}
+            passHref
+          >
+            <Button
+              onClick={(e) => handlePopoverOpen(e, id)}
+              component={'a'}
+              fullWidth
+              sx={{
+                justifyContent: 'flex-start',
+                color: theme.palette.text.primary,
+                backgroundColor: 'transparent',
+                fontWeight: 400,
+              }}
+            >
+              {itemName}
+            </Button>
+          </Link>}
           {items.map((childMenuInfo, i) => (
             <ChildMenu key={`${childMenuInfo.id}_${i}`}
               {...childMenuInfo}
@@ -162,15 +176,8 @@ const ChildMenu = ({ id, length, linkTo, itemName, childItem }) => {
         }}
       >
         {itemName}
-        {checkArrNotEmpty(childItem) && <ExpandMoreIcon
-          sx={{
-            marginLeft: theme.spacing(1 / 4),
-            width: 16,
-            height: 16,
-            transform: openedPopoverId === id ? 'rotate(-95deg)' : 'none',
-            // color: linkColor
-          }}
-        />}
+        <ExpandMoreIcon sx={{ marginLeft: theme.spacing(1 / 4), width: 16, height: 16, transform: openedPopoverId === id ? 'rotate(-95deg)' : 'none', }}
+        />
       </Button>
     </Grid>
     {(openedPopoverId === id) && (checkArrNotEmpty(childItem)) && <Popover
@@ -241,7 +248,7 @@ const MenuItem = ({ length, linkTo, itemName, theme }) => (<Grid item xs={length
       component={'a'}
       fullWidth
       sx={{
-        justifyContent: 'flex-start', 
+        justifyContent: 'flex-start',
         color: theme.palette.text.primary,
         backgroundColor: 'transparent',
         fontWeight: 400,
