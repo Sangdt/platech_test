@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-// import withHydrationOnDemand from "react-hydration-on-demand";
+import React, { useState } from 'react';
+import withHydrationOnDemand from "react-hydration-on-demand";
 // import Carousel from 'react-multi-carousel';
 // import 'react-multi-carousel/lib/styles.css';
 import Box from '@mui/material/Box';
@@ -270,5 +270,5 @@ const Spaces = ({ productList }) => {
 //   // customTransition: 'all .5',
 //   // transitionDuration: 500,
 // };
-// export default withHydrationOnDemand({on: ["visible"] })(memo(Spaces));
-export default Spaces
+export default withHydrationOnDemand({on: ["visible"] })(Spaces);
+// export default Spaces

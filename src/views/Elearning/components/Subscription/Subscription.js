@@ -5,6 +5,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
+import withHydrationOnDemand from "react-hydration-on-demand";
 
 // import Button from '@mui/material/Button';
 // import FormControl from '@mui/material/FormControl';
@@ -81,4 +82,4 @@ const Subscription = () => {
   );
 };
 
-export default Subscription;
+export default withHydrationOnDemand({on: ["visible"] })(Subscription);

@@ -1,4 +1,5 @@
 import React from 'react';
+import withHydrationOnDemand from "react-hydration-on-demand";
 // import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Link from 'next/link'
 import Box from '@mui/material/Box';
@@ -137,4 +138,4 @@ const Hero = ({ headerImage, label, shortDescription, CTAbtn }) => {
   );
 };
 
-export default Hero;
+export default withHydrationOnDemand({ on: ["visible"] })(Hero);
