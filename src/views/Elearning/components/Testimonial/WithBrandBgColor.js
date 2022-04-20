@@ -9,6 +9,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import { Image as DatoCMSImage } from "react-datocms"
+import withHydrationOnDemand from "react-hydration-on-demand";
 
 import Container from 'components/Container';
 
@@ -128,4 +129,4 @@ const WithBrandBgColor = ({ testimonial }) => {
   );
 };
 
-export default WithBrandBgColor;
+export default withHydrationOnDemand({on: ["visible"] })(WithBrandBgColor);
