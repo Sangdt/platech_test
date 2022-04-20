@@ -1,5 +1,5 @@
 import React from 'react';
-// import withHydrationOnDemand from "react-hydration-on-demand";
+import withHydrationOnDemand from "react-hydration-on-demand";
 import { useTheme } from '@mui/material/styles';
 import Divider from '@mui/material/Divider';
 import Card from '@mui/material/Card';
@@ -189,5 +189,5 @@ const VerticalMinimalDesignedBlogCards = ({ relatedBlog }) => {
   );
 };
 
-// export default withHydrationOnDemand({ on: ["visible"] })(memo(VerticalMinimalDesignedBlogCards));
-export default VerticalMinimalDesignedBlogCards;
+export default withHydrationOnDemand({ on: ["visible"] })(VerticalMinimalDesignedBlogCards);
+// export default VerticalMinimalDesignedBlogCards;
