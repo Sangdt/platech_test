@@ -36,7 +36,7 @@ const Main = ({ children, colorInvert = false, bgcolor = 'transparent', salesInf
   const [openSidebar, setOpenSidebar] = useState(false);
 
   const handleSidebarOpen = () => {
-    console.log("isMd", isMd)
+    // console.log("isMd", isMd)
     setOpenSidebar(true);
   };
 

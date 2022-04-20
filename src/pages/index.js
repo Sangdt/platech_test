@@ -9,6 +9,7 @@ import { getHomepageData } from "Helper/ServerAndBuild/callSanityCMS";
 // import Home from "components/HomePage/index";
 import GetSchemaJSON from 'components/SharedComponents/GetSchemaJSON';
 import { checkArrNotEmpty } from 'Helper/checkArrNotEmpty';
+
 const Index = ({ homePageData, ...rest }) => {
   const router = useRouter();
   // console.log("homePageData from index", rest);
