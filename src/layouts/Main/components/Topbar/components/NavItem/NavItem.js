@@ -176,8 +176,7 @@ const ChildMenu = ({ id, length, linkTo, itemName, childItem }) => {
         }}
       >
         {itemName}
-        <ExpandMoreIcon sx={{ marginLeft: theme.spacing(1 / 4), width: 16, height: 16, transform: openedPopoverId === id ? 'rotate(-95deg)' : 'none', }}
-        />
+        {(checkArrNotEmpty(childItem)) && <ExpandMoreIcon sx={{ marginLeft: theme.spacing(1 / 4), width: 16, height: 16, transform: openedPopoverId === id ? 'rotate(-95deg)' : 'none', }} />}
       </Button>
     </Grid>
     {(openedPopoverId === id) && (checkArrNotEmpty(childItem)) && <Popover
