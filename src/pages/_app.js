@@ -2,11 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // import Head from 'next/head';
 import { CacheProvider } from '@emotion/react';
+import Script from 'next/script'
 
 import Main from 'layouts/Main';
 import * as SeoAndLayoutContent from "Helper/pageLayoutCMSContent";
 import DefaultHeadTags from 'layouts/DefaultHeadTags';
 import createEmotionCache from 'components/SharedComponents/createEmotionCache';
+import * as gtag from 'components/SharedComponents/gtag'
 
 import Page from '../components/Page';
 
@@ -27,7 +29,26 @@ export default function App(props) {
 
 
   // console.log("test", pageProps.nonce)
-  return (
+  return (<>
+    {/* Global Site Tag (gtag.js) - Google Analytics */}
+    <Script
+      strategy="afterInteractive"
+      src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
+    />
+    <Script
+      id="gtag-init"
+      strategy="afterInteractive"
+      dangerouslySetInnerHTML={{
+        __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${gtag.GA_TRACKING_ID}', {
+              page_path: window.location.pathname,
+            });
+          `,
+      }}
+    />
     <CacheProvider value={emotionCache} >
       <DefaultHeadTags {...SeoAndLayoutContent?.seo} />
       <Page>
@@ -36,9 +57,11 @@ export default function App(props) {
         </Main>
       </Page>
     </CacheProvider>
-  );
+  </>);
 }
-
+export function reportWebVitals(metric) {
+  console.log(metric)
+}
 App.propTypes = {
   Component: PropTypes.elementType.isRequired,
   pageProps: PropTypes.object.isRequired,
